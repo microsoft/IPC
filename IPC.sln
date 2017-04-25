@@ -17,6 +17,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Interop", "Interop\Build\In
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Transport", "Transport\Transport.csproj", "{BDCCCCCD-21A8-446E-840B-68718C49E7D4}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NativeContainers", "NativeContainers\Build\NativeContainers.vcxproj", "{1234ED0D-4667-4299-87CD-ACE298BDF56D}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ManagedContainers", "ManagedContainers\Build\ManagedContainers.vcxproj", "{123498F7-93DC-4954-8165-FDDCD66231F0}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Object", "Object\Object.csproj", "{2A0B90AC-9117-48DA-B04C-FF194498D95D}"
 EndProject
 Global
@@ -53,6 +57,14 @@ Global
 		{BDCCCCCD-21A8-446E-840B-68718C49E7D4}.Debug|x64.Build.0 = Debug|x64
 		{BDCCCCCD-21A8-446E-840B-68718C49E7D4}.Release|x64.ActiveCfg = Release|x64
 		{BDCCCCCD-21A8-446E-840B-68718C49E7D4}.Release|x64.Build.0 = Release|x64
+		{1234ED0D-4667-4299-87CD-ACE298BDF56D}.Debug|x64.ActiveCfg = Debug|x64
+		{1234ED0D-4667-4299-87CD-ACE298BDF56D}.Debug|x64.Build.0 = Debug|x64
+		{1234ED0D-4667-4299-87CD-ACE298BDF56D}.Release|x64.ActiveCfg = Release|x64
+		{1234ED0D-4667-4299-87CD-ACE298BDF56D}.Release|x64.Build.0 = Release|x64
+		{123498F7-93DC-4954-8165-FDDCD66231F0}.Debug|x64.ActiveCfg = Debug|x64
+		{123498F7-93DC-4954-8165-FDDCD66231F0}.Debug|x64.Build.0 = Debug|x64
+		{123498F7-93DC-4954-8165-FDDCD66231F0}.Release|x64.ActiveCfg = Release|x64
+		{123498F7-93DC-4954-8165-FDDCD66231F0}.Release|x64.Build.0 = Release|x64
 		{2A0B90AC-9117-48DA-B04C-FF194498D95D}.Debug|x64.ActiveCfg = Debug|x64
 		{2A0B90AC-9117-48DA-B04C-FF194498D95D}.Debug|x64.Build.0 = Debug|x64
 		{2A0B90AC-9117-48DA-B04C-FF194498D95D}.Release|x64.ActiveCfg = Release|x64

@@ -52,6 +52,9 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\ManagedContainers\Build\ManagedContainers.vcxproj">
+      <Project>{123498f7-93dc-4954-8165-fddcd66231f0}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\..\Native\Build\Native.vcxproj">
       <Project>{2030ed0d-4667-4299-87cd-ace298bdf56d}</Project>
     </ProjectReference>
