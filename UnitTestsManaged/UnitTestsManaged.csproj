@@ -38,6 +38,10 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ManagedContainers\Build\ManagedContainers.vcxproj">
+      <Project>{123498f7-93dc-4954-8165-fddcd66231f0}</Project>
+      <Name>ManagedContainers</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Managed\Build\Managed.vcxproj">
       <Project>{705098f7-93dc-4954-8165-fddcd66231f0}</Project>
       <Name>Managed</Name>
@@ -56,6 +60,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ContainersTests.cs" />
     <Compile Include="TransportTests.cs" />
   </ItemGroup>
   <ItemGroup>

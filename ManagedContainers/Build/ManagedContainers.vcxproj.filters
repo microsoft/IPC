@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="detail">
+      <UniqueIdentifier>{41b2aef2-534d-4063-9009-fc50b4b674e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="detail\Interop">
+      <UniqueIdentifier>{57f472c5-b1d8-4b69-a290-b26eb8571fe0}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Src\AssemblyInfo.cpp" />
+    <ClCompile Include="..\Src\IVector.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Inc\IPC\Containers\Managed\detail\Vector.h">
+      <Filter>detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Inc\IVector.h" />
+    <ClInclude Include="..\..\Inc\IPC\Containers\Managed\detail\Interop\Vector.h">
+      <Filter>detail\Interop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Inc\IPC\Containers\Managed\detail\Interop\VectorImpl.h">
+      <Filter>detail\Interop</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
