@@ -1,0 +1,214 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="detail">
+      <UniqueIdentifier>{45e3f9ed-bd76-4f45-8e40-1d9c56304c65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Policies">
+      <UniqueIdentifier>{2f1787b2-c56a-42d4-9a35-217a0b269a3d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="detail\LockFree">
+      <UniqueIdentifier>{9a314083-a71b-4b7e-81b9-e2d4e33a48a6}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Src\detail\KernelObject.cpp">
+      <Filter>detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Src\detail\KernelEvent.cpp">
+      <Filter>detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Src\detail\KernelProcess.cpp">
+      <Filter>detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Src\detail\ConnectionBase.cpp">
+      <Filter>detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Src\Policies\ThreadPool.cpp">
+      <Filter>Policies</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Src\Policies\TimeoutFactory.cpp">
+      <Filter>Policies</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Src\Policies\WaitHandleFactory.cpp">
+      <Filter>Policies</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Src\stdafx.cpp">
+      <Filter>detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Src\Policies\ErrorHandler.cpp">
+      <Filter>Policies</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Src\detail\SpinLock.cpp">
+      <Filter>detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Src\detail\RecursiveSpinLock.cpp">
+      <Filter>detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Src\SharedMemory.cpp" />
+    <ClCompile Include="..\Src\detail\Info.cpp">
+      <Filter>detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Src\Policies\AsyncReceiverFactory.cpp">
+      <Filter>Policies</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Src\SharedMemoryCache.cpp" />
+    <ClCompile Include="..\Src\detail\ChannelSettingsBase.cpp">
+      <Filter>detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Src\detail\ChannelFactory.cpp">
+      <Filter>detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Src\detail\RandomString.cpp">
+      <Filter>detail</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Inc\IPC\detail\Alias.h">
+      <Filter>detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Inc\IPC\detail\RandomString.h">
+      <Filter>detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Inc\IPC\InputChannel.h" />
+    <ClInclude Include="..\..\Inc\IPC\OutputChannel.h" />
+    <ClInclude Include="..\..\Inc\IPC\SharedMemory.h" />
+    <ClInclude Include="..\..\Inc\IPC\Connector.h" />
+    <ClInclude Include="..\..\Inc\IPC\Connection.h" />
+    <ClInclude Include="..\..\Inc\IPC\Acceptor.h" />
+    <ClInclude Include="..\..\Inc\IPC\Client.h" />
+    <ClInclude Include="..\..\Inc\IPC\Server.h" />
+    <ClInclude Include="..\..\Inc\IPC\detail\Apply.h">
+      <Filter>detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Inc\IPC\DefaultTraits.h" />
+    <ClInclude Include="..\..\Inc\IPC\detail\SharedObject.h">
+      <Filter>detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Inc\IPC\Connect.h" />
+    <ClInclude Include="..\..\Inc\IPC\detail\Callback.h">
+      <Filter>detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Inc\IPC\detail\KernelEvent.h">
+      <Filter>detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Inc\IPC\detail\KernelObject.h">
+      <Filter>detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Inc\IPC\detail\KernelProcess.h">
+      <Filter>detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Inc\IPC\detail\ChannelBase.h">
+      <Filter>detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Inc\IPC\detail\ConnectionHolder.h">
+      <Filter>detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Inc\IPC\detail\PacketConnectionHolder.h">
+      <Filter>detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Inc\IPC\ComponentCollection.h" />
+    <ClInclude Include="..\..\Inc\IPC\detail\Packet.h">
+      <Filter>detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Inc\IPC\detail\ConnectionBase.h">
+      <Filter>detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Inc\IPC\Policies\ThreadPool.h">
+      <Filter>Policies</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Inc\IPC\Policies\TimeoutFactory.h">
+      <Filter>Policies</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Inc\IPC\Policies\TransactionManager.h">
+      <Filter>Policies</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Inc\IPC\Policies\WaitHandleFactory.h">
+      <Filter>Policies</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Inc\IPC\Accept.h" />
+    <ClInclude Include="..\Inc\stdafx.h">
+      <Filter>detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Inc\IPC\Policies\ErrorHandler.h">
+      <Filter>Policies</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Inc\IPC\detail\Accept.h">
+      <Filter>detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Inc\IPC\detail\Connect.h">
+      <Filter>detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Inc\IPC\Policies\AsyncReceiverFactory.h">
+      <Filter>Policies</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Inc\IPC\detail\SpinLock.h">
+      <Filter>detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Inc\IPC\detail\RecursiveSpinLock.h">
+      <Filter>detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Inc\IPC\DefaultTraitsFwd.h" />
+    <ClInclude Include="..\..\Inc\IPC\Policies\TransactionManagerFwd.h">
+      <Filter>Policies</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Inc\IPC\ClientFwd.h" />
+    <ClInclude Include="..\..\Inc\IPC\ServerFwd.h" />
+    <ClInclude Include="..\..\Inc\IPC\ConnectionFwd.h" />
+    <ClInclude Include="..\..\Inc\IPC\detail\PacketConnectionFwd.h">
+      <Filter>detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Inc\IPC\detail\PacketFwd.h">
+      <Filter>detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Inc\IPC\AcceptorFwd.h" />
+    <ClInclude Include="..\..\Inc\IPC\ConnectorFwd.h" />
+    <ClInclude Include="..\..\Inc\IPC\detail\Info.h">
+      <Filter>detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Inc\IPC\Policies\InlineReceiverFactory.h">
+      <Filter>Policies</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Inc\IPC\Policies\ReceiverFactory.h">
+      <Filter>Policies</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Inc\IPC\Policies\TransactionManagerFactory.h">
+      <Filter>Policies</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Inc\IPC\Exception.h" />
+    <ClInclude Include="..\..\Inc\IPC\detail\LockFree\ContainerList.h">
+      <Filter>detail\LockFree</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Inc\IPC\detail\LockFree\FixedQueue.h">
+      <Filter>detail\LockFree</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Inc\IPC\detail\LockFree\Queue.h">
+      <Filter>detail\LockFree</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Inc\IPC\detail\LockFree\QueueFwd.h">
+      <Filter>detail\LockFree</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Inc\IPC\detail\LockFree\IndexedObjectPool.h">
+      <Filter>detail\LockFree</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Inc\IPC\Policies\NullTimeoutFactory.h">
+      <Filter>Policies</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Inc\IPC\Policies\ReceiverFactoryFwd.h">
+      <Filter>Policies</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Inc\IPC\SharedMemoryCache.h" />
+    <ClInclude Include="..\..\Inc\IPC\ChannelSettings.h" />
+    <ClInclude Include="..\..\Inc\IPC\detail\ChannelFactory.h">
+      <Filter>detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Inc\IPC\detail\ChannelSettingsBase.h">
+      <Filter>detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Inc\IPC\Version.h" />
+    <ClInclude Include="..\..\Inc\IPC\Transport.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+</Project>

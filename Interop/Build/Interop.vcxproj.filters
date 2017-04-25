@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="detail">
+      <UniqueIdentifier>{45e3f9ed-bd76-4f45-8e40-1d9c56304c65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="detail\Interop">
+      <UniqueIdentifier>{647cf641-c404-49b8-ae45-ca5de6ea9686}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="detail\Interop\Policies">
+      <UniqueIdentifier>{13dab72a-7024-4063-83ed-caaae8a445b5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Src\stdafx.cpp">
+      <Filter>detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Src\detail\Interop\SharedMemory.cpp">
+      <Filter>detail\Interop</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Src\detail\Interop\Policies\TimeoutFactory.cpp">
+      <Filter>detail\Interop\Policies</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Src\detail\Interop\Policies\TransactionManagerFactory.cpp">
+      <Filter>detail\Interop\Policies</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Src\detail\Interop\Policies\ReceiverFactory.cpp">
+      <Filter>detail\Interop\Policies</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Inc\stdafx.h">
+      <Filter>detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Inc\IPC\Managed\detail\Interop\Policies\ReceiverFactory.h">
+      <Filter>detail\Interop\Policies</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Inc\IPC\Managed\detail\Interop\Policies\TimeoutFactory.h">
+      <Filter>detail\Interop\Policies</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Inc\IPC\Managed\detail\Interop\Policies\TransactionManagerFactory.h">
+      <Filter>detail\Interop\Policies</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Inc\IPC\Managed\detail\Interop\Policies\WaitHandleFactory.h">
+      <Filter>detail\Interop\Policies</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Inc\IPC\Managed\detail\Interop\Callback.h">
+      <Filter>detail\Interop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Inc\IPC\Managed\detail\Interop\ClientConnectorImpl.h">
+      <Filter>detail\Interop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Inc\IPC\Managed\detail\Interop\ClientImpl.h">
+      <Filter>detail\Interop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Inc\IPC\Managed\detail\Interop\ExternalConstructor.h">
+      <Filter>detail\Interop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Inc\IPC\Managed\detail\Interop\ServerAcceptorImpl.h">
+      <Filter>detail\Interop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Inc\IPC\Managed\detail\Interop\ServerImpl.h">
+      <Filter>detail\Interop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Inc\IPC\Managed\detail\Interop\SharedMemory.h">
+      <Filter>detail\Interop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Inc\IPC\Managed\detail\Interop\Transport.h">
+      <Filter>detail\Interop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Inc\IPC\Managed\detail\Interop\TransportImpl.h">
+      <Filter>detail\Interop</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{BDCCCCCD-21A8-446E-840B-68718C49E7D4}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>IPC.Managed</RootNamespace>
+    <AssemblyName>IPC.Managed.Transport</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <AssemblyClsCompliant>false</AssemblyClsCompliant>
+    <PlatformTarget>x64</PlatformTarget>
+    <TargetFrameworkProfile />
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\IPC.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <OutputPath>..\x64\Debug\</OutputPath>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>..\x64\Release\</OutputPath>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Managed\Build\Managed.vcxproj">
+      <Project>{705098F7-93DC-4954-8165-FDDCD66231F0}</Project>
+      <Name>Managed</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Object\Object.csproj">
+      <Project>{2a0b90ac-9117-48da-b04c-ff194498d95d}</Project>
+      <Name>Object</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="ComponentEventArgs.cs" />
+    <Compile Include="Config.cs" />
+    <Compile Include="ErrorEventArgs.cs" />
+    <Compile Include="IAccessor.cs" />
+    <Compile Include="IBackgroundError.cs" />
+    <Compile Include="IClient.cs" />
+    <Compile Include="IClientAccessor.cs" />
+    <Compile Include="IClientConnector.cs" />
+    <Compile Include="IComponent.cs" />
+    <Compile Include="IServer.cs" />
+    <Compile Include="IServerAcceptor.cs" />
+    <Compile Include="IServersAccessor.cs" />
+    <Compile Include="ITransport.cs" />
+    <Compile Include="TransportFactory.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

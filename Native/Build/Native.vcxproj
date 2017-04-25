@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Src\detail\ChannelFactory.cpp" />
+    <ClCompile Include="..\Src\detail\ChannelSettingsBase.cpp" />
+    <ClCompile Include="..\Src\detail\ConnectionBase.cpp" />
+    <ClCompile Include="..\Src\detail\Info.cpp" />
+    <ClCompile Include="..\Src\detail\KernelEvent.cpp" />
+    <ClCompile Include="..\Src\detail\KernelObject.cpp" />
+    <ClCompile Include="..\Src\detail\KernelProcess.cpp" />
+    <ClCompile Include="..\Src\detail\RandomString.cpp" />
+    <ClCompile Include="..\Src\detail\RecursiveSpinLock.cpp" />
+    <ClCompile Include="..\Src\detail\SpinLock.cpp" />
+    <ClCompile Include="..\Src\Policies\AsyncReceiverFactory.cpp" />
+    <ClCompile Include="..\Src\Policies\ErrorHandler.cpp" />
+    <ClCompile Include="..\Src\Policies\ThreadPool.cpp" />
+    <ClCompile Include="..\Src\Policies\TimeoutFactory.cpp" />
+    <ClCompile Include="..\Src\Policies\WaitHandleFactory.cpp" />
+    <ClCompile Include="..\Src\SharedMemory.cpp" />
+    <ClCompile Include="..\Src\SharedMemoryCache.cpp" />
+    <ClCompile Include="..\Src\stdafx.cpp">
+      <PrecompiledHeader>Create</PrecompiledHeader>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Inc\IPC\Accept.h" />
+    <ClInclude Include="..\..\Inc\IPC\Acceptor.h" />
+    <ClInclude Include="..\..\Inc\IPC\AcceptorFwd.h" />
+    <ClInclude Include="..\..\Inc\IPC\ChannelSettings.h" />
+    <ClInclude Include="..\..\Inc\IPC\Client.h" />
+    <ClInclude Include="..\..\Inc\IPC\ClientFwd.h" />
+    <ClInclude Include="..\..\Inc\IPC\ComponentCollection.h" />
+    <ClInclude Include="..\..\Inc\IPC\Connect.h" />
+    <ClInclude Include="..\..\Inc\IPC\Connection.h" />
+    <ClInclude Include="..\..\Inc\IPC\ConnectionFwd.h" />
+    <ClInclude Include="..\..\Inc\IPC\Connector.h" />
+    <ClInclude Include="..\..\Inc\IPC\ConnectorFwd.h" />
+    <ClInclude Include="..\..\Inc\IPC\DefaultTraits.h" />
+    <ClInclude Include="..\..\Inc\IPC\detail\Accept.h" />
+    <ClInclude Include="..\..\Inc\IPC\detail\ChannelFactory.h" />
+    <ClInclude Include="..\..\Inc\IPC\detail\ChannelSettingsBase.h" />
+    <ClInclude Include="..\..\Inc\IPC\detail\Connect.h" />
+    <ClInclude Include="..\..\Inc\IPC\detail\Alias.h" />
+    <ClInclude Include="..\..\Inc\IPC\detail\Apply.h" />
+    <ClInclude Include="..\..\Inc\IPC\detail\Callback.h" />
+    <ClInclude Include="..\..\Inc\IPC\detail\ChannelBase.h" />
+    <ClInclude Include="..\..\Inc\IPC\detail\ConnectionBase.h" />
+    <ClInclude Include="..\..\Inc\IPC\detail\ConnectionHolder.h" />
+    <ClInclude Include="..\..\Inc\IPC\detail\Info.h" />
+    <ClInclude Include="..\..\Inc\IPC\detail\KernelEvent.h" />
+    <ClInclude Include="..\..\Inc\IPC\detail\KernelObject.h" />
+    <ClInclude Include="..\..\Inc\IPC\detail\KernelProcess.h" />
+    <ClInclude Include="..\..\Inc\IPC\detail\LockFree\ContainerList.h" />
+    <ClInclude Include="..\..\Inc\IPC\detail\LockFree\FixedQueue.h" />
+    <ClInclude Include="..\..\Inc\IPC\detail\LockFree\IndexedObjectPool.h" />
+    <ClInclude Include="..\..\Inc\IPC\detail\LockFree\Queue.h" />
+    <ClInclude Include="..\..\Inc\IPC\detail\LockFree\QueueFwd.h" />
+    <ClInclude Include="..\..\Inc\IPC\detail\Packet.h" />
+    <ClInclude Include="..\..\Inc\IPC\detail\PacketConnectionFwd.h" />
+    <ClInclude Include="..\..\Inc\IPC\detail\PacketConnectionHolder.h" />
+    <ClInclude Include="..\..\Inc\IPC\detail\PacketFwd.h" />
+    <ClInclude Include="..\..\Inc\IPC\detail\RandomString.h" />
+    <ClInclude Include="..\..\Inc\IPC\detail\RecursiveSpinLock.h" />
+    <ClInclude Include="..\..\Inc\IPC\detail\SharedObject.h" />
+    <ClInclude Include="..\..\Inc\IPC\detail\SpinLock.h" />
+    <ClInclude Include="..\..\Inc\IPC\DefaultTraitsFwd.h" />
+    <ClInclude Include="..\..\Inc\IPC\Exception.h" />
+    <ClInclude Include="..\..\Inc\IPC\InputChannel.h" />
+    <ClInclude Include="..\..\Inc\IPC\OutputChannel.h" />
+    <ClInclude Include="..\..\Inc\IPC\Policies\AsyncReceiverFactory.h" />
+    <ClInclude Include="..\..\Inc\IPC\Policies\ErrorHandler.h" />
+    <ClInclude Include="..\..\Inc\IPC\Policies\InlineReceiverFactory.h" />
+    <ClInclude Include="..\..\Inc\IPC\Policies\NullTimeoutFactory.h" />
+    <ClInclude Include="..\..\Inc\IPC\Policies\ReceiverFactory.h" />
+    <ClInclude Include="..\..\Inc\IPC\Policies\ReceiverFactoryFwd.h" />
+    <ClInclude Include="..\..\Inc\IPC\Policies\ThreadPool.h" />
+    <ClInclude Include="..\..\Inc\IPC\Policies\TimeoutFactory.h" />
+    <ClInclude Include="..\..\Inc\IPC\Policies\TransactionManager.h" />
+    <ClInclude Include="..\..\Inc\IPC\Policies\TransactionManagerFactory.h" />
+    <ClInclude Include="..\..\Inc\IPC\Policies\TransactionManagerFwd.h" />
+    <ClInclude Include="..\..\Inc\IPC\Policies\WaitHandleFactory.h" />
+    <ClInclude Include="..\..\Inc\IPC\Server.h" />
+    <ClInclude Include="..\..\Inc\IPC\ServerFwd.h" />
+    <ClInclude Include="..\..\Inc\IPC\SharedMemory.h" />
+    <ClInclude Include="..\..\Inc\IPC\SharedMemoryCache.h" />
+    <ClInclude Include="..\..\Inc\IPC\Transport.h" />
+    <ClInclude Include="..\..\Inc\IPC\Version.h" />
+    <ClInclude Include="..\Inc\stdafx.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{2030ED0D-4667-4299-87CD-ACE298BDF56D}</ProjectGuid>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <PropertyGroup>
+    <TargetName>IPC</TargetName>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <Lib>
+      <TargetMachine>MachineX64</TargetMachine>
+    </Lib>
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\Inc;..\Inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <ProgramDataBaseFileName>$(IntDir)$(TargetName).pdb</ProgramDataBaseFileName>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <DisableSpecificWarnings>4494;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <Import Project="..\..\packages\boost.1.63.0.0\build\native\boost.targets" Condition="Exists('..\..\packages\boost.1.63.0.0\build\native\boost.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\packages\boost.1.63.0.0\build\native\boost.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\boost.1.63.0.0\build\native\boost.targets'))" />
+  </Target>
+</Project>
