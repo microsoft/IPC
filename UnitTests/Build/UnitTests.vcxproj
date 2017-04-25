@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{2A3B9657-1D10-4A71-AA21-62AD4106CED4}</ProjectGuid>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <PropertyGroup>
+    <TargetName>IPC.$(ProjectName)</TargetName>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>Ws2_32.lib; %(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <Lib>
+      <TargetMachine>MachineX64</TargetMachine>
+    </Lib>
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\Inc;..\..\Native\Inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <DisableSpecificWarnings>4494;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ItemGroup>
+    <ClCompile Include="..\ChannelFactoryTests.cpp" />
+    <ClCompile Include="..\AcceptorTests.cpp" />
+    <ClCompile Include="..\AcceptTests.cpp" />
+    <ClCompile Include="..\ApplyTests.cpp" />
+    <ClCompile Include="..\AsyncReceiverFactoryTests.cpp" />
+    <ClCompile Include="..\CallbackTests.cpp" />
+    <ClCompile Include="..\ChannelTests.cpp" />
+    <ClCompile Include="..\ClientTests.cpp" />
+    <ClCompile Include="..\ComponentCollectionTests.cpp" />
+    <ClCompile Include="..\ConnectionTests.cpp" />
+    <ClCompile Include="..\ConnectTests.cpp" />
+    <ClCompile Include="..\ErrorHandlerTests.cpp" />
+    <ClCompile Include="..\FixedLockFreeQueueTests.cpp" />
+    <ClCompile Include="..\InlineReceiverFactoryTests.cpp" />
+    <ClCompile Include="..\LockFreeIndexedObjectPoolTests.cpp" />
+    <ClCompile Include="..\LockFreeQueueTests.cpp" />
+    <ClCompile Include="..\SharedMemoryCacheTests.cpp" />
+    <ClCompile Include="..\SpinLockTests.cpp" />
+    <ClCompile Include="..\TimeoutFactoryMock.cpp" />
+    <ClCompile Include="..\TransportTests.cpp" />
+    <ClCompile Include="..\UsageTests.cpp" />
+    <ClCompile Include="..\ConnectorTests.cpp" />
+    <ClCompile Include="..\KernelObjectsTests.cpp" />
+    <ClCompile Include="..\RandomStringTests.cpp" />
+    <ClCompile Include="..\ServerTests.cpp" />
+    <ClCompile Include="..\SharedMemoryTests.cpp" />
+    <ClCompile Include="..\SharedObjectTests.cpp" />
+    <ClCompile Include="..\stdafx.cpp">
+      <PrecompiledHeader>Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\ThreadPoolTests.cpp" />
+    <ClCompile Include="..\TimeoutFactoryTests.cpp" />
+    <ClCompile Include="..\TransactionManagerTests.cpp" />
+    <ClCompile Include="..\WaitHandleFactoryMock.cpp" />
+    <ClCompile Include="..\WaitHandleFactoryTests.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\stdafx.h" />
+    <ClInclude Include="..\TimeoutFactoryMock.h" />
+    <ClInclude Include="..\TraitsMock.h" />
+    <ClInclude Include="..\WaitHandleFactoryMock.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Native\Build\Native.vcxproj">
+      <Project>{2030ed0d-4667-4299-87cd-ace298bdf56d}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="..\..\packages\boost.1.63.0.0\build\native\boost.targets" Condition="Exists('..\..\packages\boost.1.63.0.0\build\native\boost.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\packages\boost.1.63.0.0\build\native\boost.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\boost.1.63.0.0\build\native\boost.targets'))" />
+    <Error Condition="!Exists('..\..\packages\boost_unit_test_framework-vc140.1.63.0.0\build\native\boost_unit_test_framework-vc140.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\boost_unit_test_framework-vc140.1.63.0.0\build\native\boost_unit_test_framework-vc140.targets'))" />
+    <Error Condition="!Exists('..\..\packages\boost_date_time-vc140.1.63.0.0\build\native\boost_date_time-vc140.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\boost_date_time-vc140.1.63.0.0\build\native\boost_date_time-vc140.targets'))" />
+    <Error Condition="!Exists('..\..\packages\boost_thread-vc140.1.63.0.0\build\native\boost_thread-vc140.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\boost_thread-vc140.1.63.0.0\build\native\boost_thread-vc140.targets'))" />
+    <Error Condition="!Exists('..\..\packages\boost_system-vc140.1.63.0.0\build\native\boost_system-vc140.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\boost_system-vc140.1.63.0.0\build\native\boost_system-vc140.targets'))" />
+  </Target>
+  <Import Project="..\..\packages\boost_unit_test_framework-vc140.1.63.0.0\build\native\boost_unit_test_framework-vc140.targets" Condition="Exists('..\..\packages\boost_unit_test_framework-vc140.1.63.0.0\build\native\boost_unit_test_framework-vc140.targets')" />
+  <Import Project="..\..\packages\boost_date_time-vc140.1.63.0.0\build\native\boost_date_time-vc140.targets" Condition="Exists('..\..\packages\boost_date_time-vc140.1.63.0.0\build\native\boost_date_time-vc140.targets')" />
+  <Import Project="..\..\packages\boost_thread-vc140.1.63.0.0\build\native\boost_thread-vc140.targets" Condition="Exists('..\..\packages\boost_thread-vc140.1.63.0.0\build\native\boost_thread-vc140.targets')" />
+  <Import Project="..\..\packages\boost_system-vc140.1.63.0.0\build\native\boost_system-vc140.targets" Condition="Exists('..\..\packages\boost_system-vc140.1.63.0.0\build\native\boost_system-vc140.targets')" />
+</Project>

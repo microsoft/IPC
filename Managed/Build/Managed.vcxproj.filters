@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\Src\AssemblyInfo.cpp" />
+    <ClCompile Include="..\Src\Exception.cpp" />
+    <ClCompile Include="..\Src\SharedMemory.cpp" />
+    <ClCompile Include="..\Src\detail\ThreadDetector.cpp">
+      <Filter>detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Src\detail\Throw.cpp">
+      <Filter>detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Src\detail\Policies\ReceiverFactory.cpp">
+      <Filter>detail\Policies</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Src\detail\Policies\TimeoutFactory.cpp">
+      <Filter>detail\Policies</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Src\detail\Policies\WaitHandleFactory.cpp">
+      <Filter>detail\Policies</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Inc\Exception.h" />
+    <ClInclude Include="..\Inc\SharedMemory.h" />
+    <ClInclude Include="..\..\Inc\IPC\Managed\detail\Accept.h">
+      <Filter>detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Inc\IPC\Managed\detail\Arithmetic.h">
+      <Filter>detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Inc\IPC\Managed\detail\Cast.h">
+      <Filter>detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Inc\IPC\Managed\detail\Client.h">
+      <Filter>detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Inc\IPC\Managed\detail\ClientConnector.h">
+      <Filter>detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Inc\IPC\Managed\detail\ComponentHolder.h">
+      <Filter>detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Inc\IPC\Managed\detail\Connect.h">
+      <Filter>detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Inc\IPC\Managed\detail\ErrorHandler.h">
+      <Filter>detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Inc\IPC\Managed\detail\Guid.h">
+      <Filter>detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Inc\IPC\Managed\detail\Server.h">
+      <Filter>detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Inc\IPC\Managed\detail\ServerAcceptor.h">
+      <Filter>detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Inc\IPC\Managed\detail\Transport.h">
+      <Filter>detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Inc\IPC\Managed\detail\TransportImpl.h">
+      <Filter>detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Inc\IPC\Managed\detail\CloseHandler.h">
+      <Filter>detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Inc\IPC\Managed\detail\NativeObject.h">
+      <Filter>detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Inc\IPC\Managed\detail\Component.h">
+      <Filter>detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Inc\IPC\Managed\detail\Policies\WaitHandleFactory.h">
+      <Filter>detail\Policies</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Inc\IPC\Managed\detail\ManagedCallback.h">
+      <Filter>detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Inc\IPC\Managed\detail\Policies\ReceiverFactory.h">
+      <Filter>detail\Policies</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Inc\IPC\Managed\detail\Policies\TimeoutFactory.h">
+      <Filter>detail\Policies</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Inc\detail\ThreadDetector.h">
+      <Filter>detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Inc\IPC\Managed\detail\Throw.h">
+      <Filter>detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Inc\IPC\Managed\detail\Export.h">
+      <Filter>detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Inc\IPC\Managed\detail\AccessorBase.h">
+      <Filter>detail</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="detail">
+      <UniqueIdentifier>{41b2aef2-534d-4063-9009-fc50b4b674e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="detail\Policies">
+      <UniqueIdentifier>{8521221d-b4ee-4f4a-8be6-dc4247ef2472}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+</Project>

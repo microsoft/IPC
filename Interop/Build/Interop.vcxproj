@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Inc\IPC\Managed\detail\Interop\Callback.h" />
+    <ClInclude Include="..\..\Inc\IPC\Managed\detail\Interop\ClientConnectorImpl.h" />
+    <ClInclude Include="..\..\Inc\IPC\Managed\detail\Interop\ClientImpl.h" />
+    <ClInclude Include="..\..\Inc\IPC\Managed\detail\Interop\ExternalConstructor.h" />
+    <ClInclude Include="..\..\Inc\IPC\Managed\detail\Interop\Policies\ReceiverFactory.h" />
+    <ClInclude Include="..\..\Inc\IPC\Managed\detail\Interop\Policies\TimeoutFactory.h" />
+    <ClInclude Include="..\..\Inc\IPC\Managed\detail\Interop\Policies\TransactionManagerFactory.h" />
+    <ClInclude Include="..\..\Inc\IPC\Managed\detail\Interop\Policies\WaitHandleFactory.h" />
+    <ClInclude Include="..\..\Inc\IPC\Managed\detail\Interop\ServerAcceptorImpl.h" />
+    <ClInclude Include="..\..\Inc\IPC\Managed\detail\Interop\ServerImpl.h" />
+    <ClInclude Include="..\..\Inc\IPC\Managed\detail\Interop\SharedMemory.h" />
+    <ClInclude Include="..\..\Inc\IPC\Managed\detail\Interop\Transport.h" />
+    <ClInclude Include="..\..\Inc\IPC\Managed\detail\Interop\TransportImpl.h" />
+    <ClInclude Include="..\Inc\stdafx.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Src\detail\Interop\Policies\ReceiverFactory.cpp" />
+    <ClCompile Include="..\Src\detail\Interop\Policies\TimeoutFactory.cpp" />
+    <ClCompile Include="..\Src\detail\Interop\Policies\TransactionManagerFactory.cpp" />
+    <ClCompile Include="..\Src\detail\Interop\SharedMemory.cpp" />
+    <ClCompile Include="..\Src\stdafx.cpp">
+      <PrecompiledHeader>Create</PrecompiledHeader>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A13012C1-76DE-4D1D-A58B-2361D2BE8F65}</ProjectGuid>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <PropertyGroup>
+    <TargetName>IPC.Interop</TargetName>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <Lib>
+      <TargetMachine>MachineX64</TargetMachine>
+    </Lib>
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\Inc;..\Inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <ProgramDataBaseFileName>$(IntDir)$(TargetName).pdb</ProgramDataBaseFileName>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <DisableSpecificWarnings>4494;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <WholeProgramOptimization Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</WholeProgramOptimization>
+      <InlineFunctionExpansion Condition="'$(Configuration)|$(Platform)'=='Release|x64'">AnySuitable</InlineFunctionExpansion>
+      <FavorSizeOrSpeed Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Speed</FavorSizeOrSpeed>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <Import Project="..\..\packages\boost.1.63.0.0\build\native\boost.targets" Condition="Exists('..\..\packages\boost.1.63.0.0\build\native\boost.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\packages\boost.1.63.0.0\build\native\boost.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\boost.1.63.0.0\build\native\boost.targets'))" />
+  </Target>
+</Project>

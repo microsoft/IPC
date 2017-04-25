@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{705098F7-93DC-4954-8165-FDDCD66231F0}</ProjectGuid>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CLRSupport>true</CLRSupport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <PropertyGroup>
+    <TargetName>IPC.$(ProjectName)</TargetName>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\..\IPC.snk</AssemblyOriginatorKeyFile>
+    <LinkKeyFile>..\..\IPC.snk</LinkKeyFile>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <Link>
+      <AdditionalDependencies>wininet.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalOptions>/ignore:4248 %(AdditionalOptions)</AdditionalOptions>
+    </Link>
+    <Lib>
+      <TargetMachine>MachineX64</TargetMachine>
+    </Lib>
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\Inc;..\..\Inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>IPC_MANAGED_EXPORT;_SCL_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Src\AssemblyInfo.cpp" />
+    <ClCompile Include="..\Src\detail\Policies\ReceiverFactory.cpp" />
+    <ClCompile Include="..\Src\detail\Policies\TimeoutFactory.cpp" />
+    <ClCompile Include="..\Src\detail\Policies\WaitHandleFactory.cpp" />
+    <ClCompile Include="..\Src\detail\ThreadDetector.cpp" />
+    <ClCompile Include="..\Src\detail\Throw.cpp" />
+    <ClCompile Include="..\Src\Exception.cpp" />
+    <ClCompile Include="..\Src\SharedMemory.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Inc\IPC\Managed\detail\Accept.h" />
+    <ClInclude Include="..\..\Inc\IPC\Managed\detail\Arithmetic.h" />
+    <ClInclude Include="..\..\Inc\IPC\Managed\detail\Cast.h" />
+    <ClInclude Include="..\..\Inc\IPC\Managed\detail\Client.h" />
+    <ClInclude Include="..\..\Inc\IPC\Managed\detail\ClientConnector.h" />
+    <ClInclude Include="..\..\Inc\IPC\Managed\detail\CloseHandler.h" />
+    <ClInclude Include="..\..\Inc\IPC\Managed\detail\Component.h" />
+    <ClInclude Include="..\..\Inc\IPC\Managed\detail\AccessorBase.h" />
+    <ClInclude Include="..\..\Inc\IPC\Managed\detail\Export.h" />
+    <ClInclude Include="..\..\Inc\IPC\Managed\detail\NativeObject.h" />
+    <ClInclude Include="..\..\Inc\IPC\Managed\detail\ComponentHolder.h" />
+    <ClInclude Include="..\..\Inc\IPC\Managed\detail\Connect.h" />
+    <ClInclude Include="..\..\Inc\IPC\Managed\detail\ErrorHandler.h" />
+    <ClInclude Include="..\..\Inc\IPC\Managed\detail\Guid.h" />
+    <ClInclude Include="..\..\Inc\IPC\Managed\detail\ManagedCallback.h" />
+    <ClInclude Include="..\..\Inc\IPC\Managed\detail\Policies\ReceiverFactory.h" />
+    <ClInclude Include="..\..\Inc\IPC\Managed\detail\Policies\TimeoutFactory.h" />
+    <ClInclude Include="..\..\Inc\IPC\Managed\detail\Policies\WaitHandleFactory.h" />
+    <ClInclude Include="..\..\Inc\IPC\Managed\detail\Server.h" />
+    <ClInclude Include="..\..\Inc\IPC\Managed\detail\ServerAcceptor.h" />
+    <ClInclude Include="..\..\Inc\IPC\Managed\detail\Throw.h" />
+    <ClInclude Include="..\..\Inc\IPC\Managed\detail\Transport.h" />
+    <ClInclude Include="..\..\Inc\IPC\Managed\detail\TransportImpl.h" />
+    <ClInclude Include="..\Inc\detail\ThreadDetector.h" />
+    <ClInclude Include="..\Inc\Exception.h" />
+    <ClInclude Include="..\Inc\SharedMemory.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Interop\Build\Interop.vcxproj">
+      <Project>{a13012c1-76de-4d1d-a58b-2361d2be8f65}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Native\Build\Native.vcxproj">
+      <Project>{2030ed0d-4667-4299-87cd-ace298bdf56d}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <Import Project="..\..\packages\boost.1.63.0.0\build\native\boost.targets" Condition="Exists('..\..\packages\boost.1.63.0.0\build\native\boost.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\packages\boost.1.63.0.0\build\native\boost.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\boost.1.63.0.0\build\native\boost.targets'))" />
+    <Error Condition="!Exists('..\..\packages\boost_date_time-vc140.1.63.0.0\build\native\boost_date_time-vc140.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\boost_date_time-vc140.1.63.0.0\build\native\boost_date_time-vc140.targets'))" />
+  </Target>
+  <Import Project="..\..\packages\boost_date_time-vc140.1.63.0.0\build\native\boost_date_time-vc140.targets" Condition="Exists('..\..\packages\boost_date_time-vc140.1.63.0.0\build\native\boost_date_time-vc140.targets')" />
+</Project>
