@@ -1,0 +1,34 @@
+version: 1.0.{build}
+
+image: Visual Studio 2015
+
+cache:
+  - packages -> **\packages.config
+
+platform:
+  - x64
+
+configuration:
+  - Debug
+  - Release
+
+environment:
+  BUILD_PATH: $(platform)\$(configuration)
+
+matrix:
+  fast_finish: true
+
+before_build:
+  - nuget restore IPC.sln
+
+build:
+  project: IPC.sln
+
+test:
+  assemblies:
+  - $(BUILD_PATH)\IPC.Managed.UnitTests.dll
+
+test_script:
+  - cd %BUILD_PATH%
+  - IPC.UnitTests.exe --detect_memory_leaks=0 --log_level=test_suite
+  - nunit3-console /framework:net-4.5 IPC.Managed.UnitTests.dll --result=IPC.Managed.UnitTests.xml;format=AppVeyor
