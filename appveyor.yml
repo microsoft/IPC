@@ -31,4 +31,4 @@ test:
 test_script:
   - cd %BUILD_PATH%
   - IPC.UnitTests.exe --detect_memory_leaks=0 --log_level=test_suite
-  - nunit3-console /framework:net-4.5 IPC.Managed.UnitTests.dll --result=IPC.Managed.UnitTests.xml;format=AppVeyor
+  - nunit3-console /framework:net-4.5 /labels IPC.Managed.UnitTests.dll --result=IPC.Managed.UnitTests.xml;format=AppVeyor
