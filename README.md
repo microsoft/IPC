@@ -1,3 +1,5 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/dl929xf6rgaj257b/branch/master?svg=true)](https://ci.appveyor.com/project/ara-ayvazyan/ipc/branch/master)
+
 # IPC
 
 IPC is a C++ library that provides inter-process communication using shared memory on Windows.<br/>
