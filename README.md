@@ -1,6 +1,6 @@
-[![Build status](https://ci.appveyor.com/api/projects/status/dl929xf6rgaj257b/branch/master?svg=true)](https://ci.appveyor.com/project/ara-ayvazyan/ipc/branch/master)
-
 # IPC
+
+[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/Microsoft/IPC/blob/master/LICENSE) [![Build status](https://ci.appveyor.com/api/projects/status/dl929xf6rgaj257b/branch/master?svg=true)](https://ci.appveyor.com/project/ara-ayvazyan/ipc/branch/master)
 
 IPC is a C++ library that provides inter-process communication using shared memory on Windows.<br/>
 A .NET wrapper is available which allows interaction with C++ as well.
@@ -23,4 +23,6 @@ This project has adopted the [Microsoft Open Source Code of Conduct](https://ope
 
 # License
 
-Code licensed under the [MIT License](https://github.com/Microsoft/IPC/blob/master/LICENSE).
+Copyright (c) Microsoft Corporation. All rights reserved.
+
+Licensed under the [MIT](https://github.com/Microsoft/IPC/blob/master/LICENSE) License.
