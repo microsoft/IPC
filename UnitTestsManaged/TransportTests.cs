@@ -51,11 +51,11 @@ namespace IPC.Managed.UnitTests
                     newServerEvent.Set();
                 };
 
+                IServer<int, int> server;
+
                 using (var client = await connector.ConnectAsync(address))
                 {
                     newServerEvent.Wait();
-
-                    IServer<int, int> server;
 
                     lock (servers)
                     {
@@ -71,6 +71,8 @@ namespace IPC.Managed.UnitTests
 
                     Assert.AreEqual(100, await client.InvokeAsync(100));
                 }
+
+                server.Dispose();
             }
 
             Assert.IsTrue(isClientClosed);
