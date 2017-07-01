@@ -4,14 +4,13 @@
 #include "Server.h"
 #include "DefaultTraits.h"
 #include "ComponentCollection.h"
+#include "Exception.h"
 #include "detail/ChannelFactory.h"
 #include "detail/Info.h"
 #include "detail/KernelEvent.h"
 #include "detail/KernelProcess.h"
 #include "detail/RandomString.h"
 #include "detail/Apply.h"
-#include "ComponentCollection.h"
-#include "Exception.h"
 #include <memory>
 #include <future>
 
