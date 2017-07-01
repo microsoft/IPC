@@ -5,7 +5,7 @@
 IPC is a C++ library that provides inter-process communication using shared memory on Windows.<br/>
 A .NET wrapper is available which allows interaction with C++ as well.
 
-Integration with [Bond](https://github.com/Microsoft/bond) is coming soon.
+Integration with [Bond](https://github.com/Microsoft/bond) is available at [IPC.Bond](https://github.com/Microsoft/IPC.Bond).
 
 # Build
 
