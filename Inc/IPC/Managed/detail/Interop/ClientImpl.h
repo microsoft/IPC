@@ -46,14 +46,7 @@ namespace Managed
         template <typename Request, typename Response>
         void Transport<Request, Response>::Client::operator()(const Request& request, Callback<void(Response&&)>&& callback, const std::chrono::milliseconds& timeout)
         {
-            if (timeout == std::chrono::milliseconds::zero())
-            {
-                this->get()->operator()(request, std::move(callback));
-            }
-            else
-            {
-                this->get()->operator()(request, std::move(callback), timeout);
-            }
+            this->get()->operator()(request, std::move(callback), timeout);
         }
 
         template <typename Request, typename Response>
