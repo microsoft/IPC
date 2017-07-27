@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "IPC/Transport.h"
 #include "IPC/detail/RandomString.h"
+#include "TraitsMock.h"
 #include <cmath>
 #include <memory>
 #include <vector>
@@ -17,6 +18,8 @@
 
 
 BOOST_AUTO_TEST_SUITE(TransportTests)
+
+using Traits = IPC::UnitTest::Mocks::NullTimeoutTraits;
 
 BOOST_AUTO_TEST_CASE(AcceptorConnectorTest)
 {
@@ -41,7 +44,7 @@ BOOST_AUTO_TEST_CASE(AcceptorConnectorTest)
 
     auto name = IPC::detail::GenerateRandomString();
 
-    using Transport = IPC::Transport<int, double>;
+    using Transport = IPC::Transport<int, double, Traits>;
 
     Transport transport;
 
@@ -125,7 +128,7 @@ BOOST_AUTO_TEST_CASE(ReverseConnectionAcceptorConnectorTest)
 
     auto name = IPC::detail::GenerateRandomString();
 
-    using Transport = IPC::Transport<int, double>;
+    using Transport = IPC::Transport<int, double, Traits>;
 
     Transport transport;
 
@@ -204,7 +207,7 @@ BOOST_AUTO_TEST_CASE(AcceptConnectTest)
 
     auto name = IPC::detail::GenerateRandomString();
 
-    using Transport = IPC::Transport<int, double>;
+    using Transport = IPC::Transport<int, double, Traits>;
 
     Transport transport;
 
@@ -260,7 +263,7 @@ BOOST_AUTO_TEST_CASE(ReverseConnectionAcceptConnectTest)
 
     auto name = IPC::detail::GenerateRandomString();
 
-    using Transport = IPC::Transport<int, double>;
+    using Transport = IPC::Transport<int, double, Traits>;
 
     Transport transport;
 
@@ -320,7 +323,7 @@ BOOST_AUTO_TEST_CASE(DynamicDataTest)
 
     auto name = IPC::detail::GenerateRandomString();
 
-    using Transport = IPC::Transport<OptionalString, OptionalString>;
+    using Transport = IPC::Transport<OptionalString, OptionalString, Traits>;
 
     Transport transport;
 

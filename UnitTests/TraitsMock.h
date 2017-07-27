@@ -12,16 +12,19 @@ namespace UnitTest
 {
 namespace Mocks
 {
-    struct Traits : DefaultTraits
+    struct NullTimeoutTraits : DefaultTraits
     {
-        using WaitHandleFactory = Mocks::WaitHandleFactory;
-
-        using ReceiverFactory = Policies::InlineReceiverFactory;
-
         using TimeoutFactory = Policies::NullTimeoutFactory;
 
         template <typename Context>
         using TransactionManager = Policies::TransactionManager<Context, TimeoutFactory>;
+    };
+
+    struct Traits : NullTimeoutTraits
+    {
+        using WaitHandleFactory = Mocks::WaitHandleFactory;
+
+        using ReceiverFactory = Policies::InlineReceiverFactory;
 
         struct ErrorHandler
         {

@@ -4,6 +4,7 @@
 #include "IPC/Connect.h"
 #include "IPC/Connector.h"
 #include "IPC/detail/RandomString.h"
+#include "TraitsMock.h"
 #include <cmath>
 #include <memory>
 #include <vector>
@@ -20,6 +21,8 @@
 
 
 BOOST_AUTO_TEST_SUITE(UsageTests)
+
+using Traits = IPC::UnitTest::Mocks::NullTimeoutTraits;
 
 BOOST_AUTO_TEST_CASE(AcceptorConnectorTest)
 {
@@ -46,16 +49,16 @@ BOOST_AUTO_TEST_CASE(AcceptorConnectorTest)
 
     std::mutex lock;
     std::condition_variable serverInserted;
-    std::vector<std::unique_ptr<IPC::Server<int, double>>> servers;
+    std::vector<std::unique_ptr<IPC::Server<int, double, Traits>>> servers;
 
-    IPC::ServerAcceptor<int, double> acceptor{
+    IPC::ServerAcceptor<int, double, Traits> acceptor{
         name.c_str(),
         [&](auto futureConnection)
         {
             try
             {
                 std::lock_guard<std::mutex> guard{ lock };
-                servers.push_back(std::make_unique<IPC::Server<int, double>>(futureConnection.get(), serverHandler, closeHandler));
+                servers.push_back(std::make_unique<IPC::Server<int, double, Traits>>(futureConnection.get(), serverHandler, closeHandler));
                 serverInserted.notify_one();
             }
             catch (const std::exception& e)
@@ -64,13 +67,13 @@ BOOST_AUTO_TEST_CASE(AcceptorConnectorTest)
             }
         } };
 
-    std::unique_ptr<IPC::Client<int, double>> client;
+    std::unique_ptr<IPC::Client<int, double, Traits>> client;
 
-    IPC::ClientConnector<int, double> connector;
+    IPC::ClientConnector<int, double, Traits> connector;
 
     try
     {
-        client = std::make_unique<IPC::Client<int, double>>(connector.Connect(name.c_str()).get(), closeHandler);
+        client = std::make_unique<IPC::Client<int, double, Traits>>(connector.Connect(name.c_str()).get(), closeHandler);
     }
     catch (const std::exception& e)
     {
@@ -124,16 +127,16 @@ BOOST_AUTO_TEST_CASE(ReverseConnectionAcceptorConnectorTest)
 
     std::mutex lock;
     std::condition_variable clientInserted;
-    std::vector<std::unique_ptr<IPC::Client<int, double>>> clients;
+    std::vector<std::unique_ptr<IPC::Client<int, double, Traits>>> clients;
 
-    IPC::ClientAcceptor<int, double> acceptor{
+    IPC::ClientAcceptor<int, double, Traits> acceptor{
         name.c_str(),
         [&](auto futureConnection)
         {
             try
             {
                 std::lock_guard<std::mutex> guard{ lock };
-                clients.push_back(std::make_unique<IPC::Client<int, double>>(futureConnection.get(), closeHandler));
+                clients.push_back(std::make_unique<IPC::Client<int, double, Traits>>(futureConnection.get(), closeHandler));
                 clientInserted.notify_one();
             }
             catch (const std::exception& e)
@@ -142,13 +145,13 @@ BOOST_AUTO_TEST_CASE(ReverseConnectionAcceptorConnectorTest)
             }
         } };
 
-    std::unique_ptr<IPC::Server<int, double>> server;
+    std::unique_ptr<IPC::Server<int, double, Traits>> server;
 
-    IPC::ServerConnector<int, double> connector;
+    IPC::ServerConnector<int, double, Traits> connector;
 
     try
     {
-        server = std::make_unique<IPC::Server<int, double>>(connector.Connect(name.c_str()).get(), serverHandler, closeHandler);
+        server = std::make_unique<IPC::Server<int, double, Traits>>(connector.Connect(name.c_str()).get(), serverHandler, closeHandler);
     }
     catch (const std::exception& e)
     {
@@ -195,11 +198,11 @@ BOOST_AUTO_TEST_CASE(AcceptConnectTest)
 
     auto name = IPC::detail::GenerateRandomString();
 
-    auto serversAccessor = IPC::AcceptServers<int, double>(name.c_str(), [&](auto&&...) { return serverHandler; });
+    auto serversAccessor = IPC::AcceptServers<int, double, Traits>(name.c_str(), [&](auto&&...) { return serverHandler; });
 
-    auto clientAccessor = IPC::ConnectClient(name.c_str(), std::make_shared<IPC::ClientConnector<int, double>>(), false);
+    auto clientAccessor = IPC::ConnectClient(name.c_str(), std::make_shared<IPC::ClientConnector<int, double, Traits>>(), false);
 
-    std::shared_ptr<IPC::Client<int, double>> client;
+    std::shared_ptr<IPC::Client<int, double, Traits>> client;
 
     try
     {
@@ -247,15 +250,15 @@ BOOST_AUTO_TEST_CASE(ReverseConnectionAcceptConnectTest)
 
     auto name = IPC::detail::GenerateRandomString();
 
-    auto clientsAccessor = IPC::AcceptClients<int, double>(name.c_str());
+    auto clientsAccessor = IPC::AcceptClients<int, double, Traits>(name.c_str());
 
     auto serverAccessor = IPC::ConnectServer(
         name.c_str(),
-        std::make_shared<IPC::ServerConnector<int, double>>(),
+        std::make_shared<IPC::ServerConnector<int, double, Traits>>(),
         [&](auto&&...) { return serverHandler; },
         false);
 
-    std::shared_ptr<IPC::Server<int, double>> server;
+    std::shared_ptr<IPC::Server<int, double, Traits>> server;
 
     try
     {
@@ -307,7 +310,7 @@ BOOST_AUTO_TEST_CASE(DynamicDataTest)
 
     auto name = IPC::detail::GenerateRandomString();
 
-    auto serversAccessor = IPC::AcceptServers<OptionalString, OptionalString>(
+    auto serversAccessor = IPC::AcceptServers<OptionalString, OptionalString, Traits>(
         name.c_str(),
         [&](const auto& connection)
         {
@@ -318,9 +321,9 @@ BOOST_AUTO_TEST_CASE(DynamicDataTest)
             };
         });
 
-    auto clientAccessor = IPC::ConnectClient(name.c_str(), std::make_shared<IPC::ClientConnector<OptionalString, OptionalString>>(), false);
+    auto clientAccessor = IPC::ConnectClient(name.c_str(), std::make_shared<IPC::ClientConnector<OptionalString, OptionalString, Traits>>(), false);
 
-    std::shared_ptr<IPC::Client<OptionalString, OptionalString>> client;
+    std::shared_ptr<IPC::Client<OptionalString, OptionalString, Traits>> client;
 
     try
     {
