@@ -23,6 +23,7 @@ before_build:
 
 build:
   project: IPC.sln
+  parallel: true
 
 test:
   assemblies:
