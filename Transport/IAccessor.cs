@@ -8,5 +8,7 @@ namespace IPC.Managed
         event EventHandler<ComponentEventArgs<T>> Connected;
 
         event EventHandler<ComponentEventArgs<T>> Disconnected;
+
+        bool Enabled { get; set; }
     }
 }

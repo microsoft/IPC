@@ -15,8 +15,8 @@ namespace IPC.Managed
         IClientConnector<Request, Response> MakeClientConnector();
 
         IClientAccessor<Request, Response> ConnectClient(
-            string name, bool async, TimeSpan timeout = default(TimeSpan), IClientConnector<Request, Response> connector = null);
+            string name, bool async, TimeSpan timeout = default(TimeSpan), IClientConnector<Request, Response> connector = null, bool disabled = false);
 
-        IServersAccessor<Request, Response> AcceptServers(string name, HandlerFactory<Request, Response> handlerFactory);
+        IServersAccessor<Request, Response> AcceptServers(string name, HandlerFactory<Request, Response> handlerFactory, bool disabled = false);
     }
 }

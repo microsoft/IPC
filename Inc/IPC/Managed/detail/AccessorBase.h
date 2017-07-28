@@ -5,6 +5,10 @@
 #include "ErrorHandler.h"
 #include "Interop/Callback.h"
 
+#pragma managed(push, off)
+#include <boost/optional.hpp>
+#pragma managed(pop)
+
 #include <msclr/auto_handle.h>
 
 
@@ -14,22 +18,55 @@ namespace Managed
 {
     namespace detail
     {
-        template <typename T>
-        ref class AccessorBase : IAccessor<T>
+        template <typename T, typename NativeAccessor>
+        ref class AccessorBase abstract : IAccessor<T>
         {
         public:
-            ~AccessorBase()
-            {}
-
             virtual event System::EventHandler<ComponentEventArgs<T>^>^ Connected;
 
             virtual event System::EventHandler<ComponentEventArgs<T>^>^ Disconnected;
 
             virtual event System::EventHandler<ErrorEventArgs^>^ Error;
 
+            virtual property System::Boolean Enabled
+            {
+                System::Boolean get()
+                {
+                    return static_cast<bool>(*m_accessor);
+                }
+
+                void set(System::Boolean value)
+                try
+                {
+                    if (Enabled != value)
+                    {
+                        *m_accessor = value ? boost::optional<NativeAccessor>{ MakeAccessor() } : boost::none;
+                    }
+                }
+                catch (const std::exception& /*e*/)
+                {
+                    ThrowManagedException(std::current_exception());
+                }
+            }
+
         protected:
             AccessorBase()
             {}
+
+            virtual NativeAccessor MakeAccessor() abstract;
+
+            property NativeAccessor& Accessor
+            {
+                NativeAccessor& get()
+                {
+                    if (!Enabled)
+                    {
+                        throw gcnew Exception{ "Accessor is disabled." };
+                    }
+
+                    return **m_accessor;
+                }
+            }
 
         internal:
             void TriggerConnected(T component)
@@ -46,10 +83,13 @@ namespace Managed
             {
                 Error(this, gcnew ErrorEventArgs{ e });
             }
+
+        private:
+            NativeObject<boost::optional<NativeAccessor>> m_accessor;
         };
 
 
-        template <typename NativeComponent, typename NativeConfig, typename Component, typename Interface>
+        template <typename NativeComponent, typename NativeConfig, typename NativeAccessor, typename Component, typename Interface>
         ref class ComponentFactoryLambdaBase abstract
         {
         public:
@@ -91,7 +131,7 @@ namespace Managed
             }
 
         protected:
-            ComponentFactoryLambdaBase(const NativeConfig& config, AccessorBase<Interface^>^ accessor)
+            ComponentFactoryLambdaBase(const NativeConfig& config, AccessorBase<Interface^, NativeAccessor>^ accessor)
                 : m_config{ config },
                   m_errorHandler{ accessor }
             {}
@@ -99,11 +139,11 @@ namespace Managed
             virtual Component^ MakeComponent(
                 typename NativeComponent::ConnectionPtr&& connection,
                 Interop::Callback<void()>&& closeHandler,
-                const NativeConfig& config) = 0;
+                const NativeConfig& config) abstract;
 
         private:
             NativeObject<NativeConfig> m_config;
-            ErrorHandler<AccessorBase<Interface^>> m_errorHandler;
+            ErrorHandler<AccessorBase<Interface^, NativeAccessor>> m_errorHandler;
         };
 
     } // detail
