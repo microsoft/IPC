@@ -52,9 +52,9 @@ namespace Managed
             virtual IClientConnector^ MakeClientConnector();
 
             virtual IClientAccessor^ ConnectClient(
-                System::String^ acceptorName, System::Boolean async, System::TimeSpan timeout, IClientConnector^ connector, System::Boolean disabled);
+                System::String^ acceptorName, System::Boolean async, System::TimeSpan timeout, IClientConnector^ connector, System::Boolean enabled);
 
-            virtual IServersAccessor^ AcceptServers(System::String^ name, HandlerFactory^ handlerFactory, System::Boolean disabled);
+            virtual IServersAccessor^ AcceptServers(System::String^ name, HandlerFactory^ handlerFactory, System::Boolean enabled);
 
         internal:
             ref class Server;

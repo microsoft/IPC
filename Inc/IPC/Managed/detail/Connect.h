@@ -90,10 +90,10 @@ namespace Managed
 
         template <typename Request, typename Response>
         auto Transport<Request, Response>::ConnectClient(
-            System::String^ acceptorName, System::Boolean async, System::TimeSpan timeout, IClientConnector^ connector, System::Boolean disabled)
+            System::String^ acceptorName, System::Boolean async, System::TimeSpan timeout, IClientConnector^ connector, System::Boolean enabled)
             -> IClientAccessor^
         {
-            return gcnew ClientAccessor{ %m_transport, acceptorName, async, timeout, connector ? connector : m_clientConnector.Value, !disabled };
+            return gcnew ClientAccessor{ %m_transport, acceptorName, async, timeout, connector ? connector : m_clientConnector.Value, enabled };
         }
 
     } // detail

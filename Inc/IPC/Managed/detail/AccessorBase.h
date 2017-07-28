@@ -36,16 +36,18 @@ namespace Managed
                 }
 
                 void set(System::Boolean value)
-                try
                 {
                     if (Enabled != value)
                     {
-                        *m_accessor = value ? boost::optional<NativeAccessor>{ MakeAccessor() } : boost::none;
+                        try
+                        {
+                            *m_accessor = value ? boost::optional<NativeAccessor>{ MakeAccessor() } : boost::none;
+                        }
+                        catch (const std::exception& /*e*/)
+                        {
+                            ThrowManagedException(std::current_exception());
+                        }
                     }
-                }
-                catch (const std::exception& /*e*/)
-                {
-                    ThrowManagedException(std::current_exception());
                 }
             }
 

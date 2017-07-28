@@ -92,10 +92,10 @@ namespace Managed
 
 
         template <typename Request, typename Response>
-        auto Transport<Request, Response>::AcceptServers(System::String^ name, HandlerFactory^ handlerFactory, System::Boolean disabled)
+        auto Transport<Request, Response>::AcceptServers(System::String^ name, HandlerFactory^ handlerFactory, System::Boolean enabled)
             -> IServersAccessor^
         {
-            return gcnew ServersAccessor{ %m_transport, name, handlerFactory, !disabled };
+            return gcnew ServersAccessor{ %m_transport, name, handlerFactory, enabled };
         }
 
     } // detail
