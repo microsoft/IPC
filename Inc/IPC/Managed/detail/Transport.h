@@ -41,7 +41,8 @@ namespace Managed
             using NativeClientConnector = typename NativeTransport::ClientConnector;
             using NativeServerAcceptor = typename NativeTransport::ServerAcceptor;
 
-            using NativeServerCollection = typename NativeTransport::ServerCollection;
+            using NativeClientAccessor = Interop::Callback<std::shared_ptr<void>()>;
+            using NativeServersAccessor = Interop::Callback<Interop::Callback<const typename NativeTransport::ServerCollection&()>()>;
 
         public:
             explicit Transport(Config^ config);
@@ -50,9 +51,10 @@ namespace Managed
 
             virtual IClientConnector^ MakeClientConnector();
 
-            virtual IClientAccessor^ ConnectClient(System::String^ acceptorName, System::Boolean async, System::TimeSpan timeout, IClientConnector^ connector);
+            virtual IClientAccessor^ ConnectClient(
+                System::String^ acceptorName, System::Boolean async, System::TimeSpan timeout, IClientConnector^ connector, System::Boolean enabled);
 
-            virtual IServersAccessor^ AcceptServers(System::String^ name, HandlerFactory^ handlerFactory);
+            virtual IServersAccessor^ AcceptServers(System::String^ name, HandlerFactory^ handlerFactory, System::Boolean enabled);
 
         internal:
             ref class Server;
