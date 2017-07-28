@@ -109,13 +109,13 @@ namespace Policies
 
         static_assert(std::is_same<Id, typename TransactionPool::Index>::value, "Id and Index must have the same type.");
 
-        static auto NonZeroTimeout()
+        static constexpr auto NonZeroTimeout()
         {
             return std::chrono::seconds{ 3 };
         }
 
         template <typename Rep, typename Period, typename... Timeouts>
-        static decltype(auto) NonZeroTimeout(const std::chrono::duration<Rep, Period>& timeout, Timeouts&&... timeouts)
+        static constexpr decltype(auto) NonZeroTimeout(const std::chrono::duration<Rep, Period>& timeout, Timeouts&&... timeouts)
         {
             return timeout != std::chrono::duration<Rep, Period>::zero() ? timeout : NonZeroTimeout(std::forward<Timeouts>(timeouts)...);
         }
