@@ -18,8 +18,6 @@ namespace Policies
     template <typename Context, typename TimeoutFactory>
     class TransactionManager
     {
-        static constexpr std::chrono::seconds c_defaultTimeout{ 3 };
-
     public:
         using Id = std::uint32_t;
 
@@ -27,7 +25,7 @@ namespace Policies
 
         explicit TransactionManager(TimeoutFactory timeoutFactory, const std::chrono::milliseconds& defaultTimeout = {})
             : m_timeoutFactory{ std::move(timeoutFactory) },
-              m_defaultTimeout{ defaultTimeout != std::chrono::milliseconds::zero() ? defaultTimeout : c_defaultTimeout }
+              m_defaultTimeout{ NonZeroTimeout(defaultTimeout) }
         {}
 
         template <typename OtherContext>
@@ -44,9 +42,7 @@ namespace Policies
 
             try
             {
-                transaction.Begin(
-                    std::forward<OtherContext>(context),
-                    timeout != std::chrono::milliseconds::zero() ? timeout : m_defaultTimeout);
+                transaction.Begin(std::forward<OtherContext>(context), NonZeroTimeout(timeout, m_defaultTimeout));
             }
             catch (...)
             {
@@ -113,10 +109,21 @@ namespace Policies
 
         static_assert(std::is_same<Id, typename TransactionPool::Index>::value, "Id and Index must have the same type.");
 
+        static auto NonZeroTimeout()
+        {
+            return std::chrono::seconds{ 3 };
+        }
+
+        template <typename Rep, typename Period, typename... Timeouts>
+        static decltype(auto) NonZeroTimeout(const std::chrono::duration<Rep, Period>& timeout, Timeouts&&... timeouts)
+        {
+            return timeout != std::chrono::duration<Rep, Period>::zero() ? timeout : NonZeroTimeout(std::forward<Timeouts>(timeouts)...);
+        }
+
 
         std::unique_ptr<TransactionPool> m_transactions{ std::make_unique<TransactionPool>() };
         TimeoutFactory m_timeoutFactory;
-        std::chrono::milliseconds m_defaultTimeout{ c_defaultTimeout };
+        std::chrono::milliseconds m_defaultTimeout{ NonZeroTimeout() };
     };
 
 } // Policies
