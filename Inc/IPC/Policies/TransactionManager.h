@@ -18,6 +18,8 @@ namespace Policies
     template <typename Context, typename TimeoutFactory>
     class TransactionManager
     {
+        static constexpr std::chrono::seconds c_defaultTimeout{ 3 };
+
     public:
         using Id = std::uint32_t;
 
@@ -25,7 +27,7 @@ namespace Policies
 
         explicit TransactionManager(TimeoutFactory timeoutFactory, const std::chrono::milliseconds& defaultTimeout = {})
             : m_timeoutFactory{ std::move(timeoutFactory) },
-              m_defaultTimeout{ defaultTimeout != std::chrono::milliseconds::zero() ? defaultTimeout : GetDefaultTimeout() }
+              m_defaultTimeout{ defaultTimeout != std::chrono::milliseconds::zero() ? defaultTimeout : c_defaultTimeout }
         {}
 
         template <typename OtherContext>
@@ -69,6 +71,11 @@ namespace Policies
             m_transactions->ReturnAll([](auto& transaction) { transaction.End(); });
         }
 
+        const std::chrono::milliseconds& GetDefaultTimeout() const
+        {
+            return m_defaultTimeout;
+        }
+
     private:
         class Transaction
         {
@@ -106,15 +113,10 @@ namespace Policies
 
         static_assert(std::is_same<Id, typename TransactionPool::Index>::value, "Id and Index must have the same type.");
 
-        static constexpr auto GetDefaultTimeout()
-        {
-            return std::chrono::seconds{ 3 };
-        }
-
 
         std::unique_ptr<TransactionPool> m_transactions{ std::make_unique<TransactionPool>() };
         TimeoutFactory m_timeoutFactory;
-        std::chrono::milliseconds m_defaultTimeout{ GetDefaultTimeout() };
+        std::chrono::milliseconds m_defaultTimeout{ c_defaultTimeout };
     };
 
 } // Policies

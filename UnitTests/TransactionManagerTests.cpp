@@ -128,4 +128,34 @@ BOOST_AUTO_TEST_CASE(TimeoutTest)
     BOOST_TEST(!transactions.EndTransaction(id2));
 }
 
+BOOST_AUTO_TEST_CASE(DefaultTimeoutTest)
+{
+    UnitTest::Mocks::TimeoutFactory timeouts;
+    Policies::TransactionManager<int, decltype(timeouts)> transactions{ timeouts };
+
+    auto check = [&]
+    {
+        transactions.BeginTransaction(1, std::chrono::milliseconds{ 100 });
+        BOOST_TEST(timeouts->size() == 1);
+        BOOST_TEST((timeouts->back().second == std::chrono::milliseconds{ 100 }));
+
+        transactions.BeginTransaction(2);
+        BOOST_TEST(timeouts->size() == 2);
+        BOOST_TEST((timeouts->back().second == transactions.GetDefaultTimeout()));
+
+        transactions.BeginTransaction(3, std::chrono::milliseconds::zero());
+        BOOST_TEST(timeouts->size() == 3);
+        BOOST_TEST((timeouts->back().second == transactions.GetDefaultTimeout()));
+    };
+
+    BOOST_TEST((transactions.GetDefaultTimeout() != std::chrono::milliseconds::zero()));
+    check();
+
+    transactions = decltype(transactions){ timeouts, std::chrono::milliseconds{ 10 } };
+    timeouts->clear();
+
+    BOOST_TEST((transactions.GetDefaultTimeout() == std::chrono::milliseconds{ 10 }));
+    check();
+}
+
 BOOST_AUTO_TEST_SUITE_END()
