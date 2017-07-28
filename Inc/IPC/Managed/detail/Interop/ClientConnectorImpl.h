@@ -25,19 +25,13 @@ namespace Managed
         template <typename Request, typename Response>
         void Transport<Request, Response>::ClientConnector::Connect(const char* acceptorName, HandlerFactory&& handlerFactory, const std::chrono::milliseconds& timeout)
         {
-            auto handler = [handlerFactory = std::move(handlerFactory)](auto&& futureConnection) mutable
-            {
-                handlerFactory([futureConnection = std::move(futureConnection)]() mutable { return futureConnection.get(); });
-            };
-
-            if (timeout == std::chrono::milliseconds::zero())
-            {
-                this->get()->Connect(acceptorName, std::move(handler));
-            }
-            else
-            {
-                this->get()->Connect(acceptorName, std::move(handler), timeout);
-            }
+            this->get()->Connect(
+                acceptorName,
+                [handlerFactory = std::move(handlerFactory)](auto&& futureConnection) mutable
+                {
+                    handlerFactory([futureConnection = std::move(futureConnection)]() mutable { return futureConnection.get(); });
+                },
+                timeout);
         }
 
     } // Interop

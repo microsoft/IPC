@@ -4,6 +4,7 @@
 #include "NullTimeoutFactory.h"
 #include "IPC/detail/LockFree/IndexedObjectPool.h"
 #include <chrono>
+#include <cassert>
 
 #pragma warning(push)
 #include <boost/optional.hpp>
@@ -24,17 +25,11 @@ namespace Policies
 
         explicit TransactionManager(TimeoutFactory timeoutFactory, const std::chrono::milliseconds& defaultTimeout = {})
             : m_timeoutFactory{ std::move(timeoutFactory) },
-              m_defaultTimeout{ defaultTimeout }
+              m_defaultTimeout{ NonZeroTimeout(defaultTimeout) }
         {}
 
         template <typename OtherContext>
-        Id BeginTransaction(OtherContext&& context)
-        {
-            return BeginTransaction(std::forward<OtherContext>(context), m_defaultTimeout);
-        }
-
-        template <typename OtherContext>
-        Id BeginTransaction(OtherContext&& context, const std::chrono::milliseconds& timeout)
+        Id BeginTransaction(OtherContext&& context, const std::chrono::milliseconds& timeout = {})
         {
             auto result = m_transactions->Take(
                 [this](Id id)
@@ -47,9 +42,7 @@ namespace Policies
 
             try
             {
-                transaction.Begin(
-                    std::forward<OtherContext>(context),
-                    timeout != std::chrono::milliseconds::zero() ? timeout : GetDefaultTimeout());
+                transaction.Begin(std::forward<OtherContext>(context), NonZeroTimeout(timeout, m_defaultTimeout));
             }
             catch (...)
             {
@@ -74,6 +67,11 @@ namespace Policies
             m_transactions->ReturnAll([](auto& transaction) { transaction.End(); });
         }
 
+        const std::chrono::milliseconds& GetDefaultTimeout() const
+        {
+            return m_defaultTimeout;
+        }
+
     private:
         class Transaction
         {
@@ -86,6 +84,7 @@ namespace Policies
             template <typename OtherContext>
             void Begin(OtherContext&& context, const std::chrono::milliseconds& timeout)
             {
+                assert(timeout != std::chrono::milliseconds::zero());
                 m_context = std::forward<OtherContext>(context);
                 m_timeoutScheduler(timeout);
             }
@@ -110,15 +109,21 @@ namespace Policies
 
         static_assert(std::is_same<Id, typename TransactionPool::Index>::value, "Id and Index must have the same type.");
 
-        static constexpr auto GetDefaultTimeout()
+        static constexpr auto NonZeroTimeout()
         {
             return std::chrono::seconds{ 3 };
+        }
+
+        template <typename Rep, typename Period, typename... Timeouts>
+        static constexpr decltype(auto) NonZeroTimeout(const std::chrono::duration<Rep, Period>& timeout, Timeouts&&... timeouts)
+        {
+            return timeout != std::chrono::duration<Rep, Period>::zero() ? timeout : NonZeroTimeout(std::forward<Timeouts>(timeouts)...);
         }
 
 
         std::unique_ptr<TransactionPool> m_transactions{ std::make_unique<TransactionPool>() };
         TimeoutFactory m_timeoutFactory;
-        std::chrono::milliseconds m_defaultTimeout{};
+        std::chrono::milliseconds m_defaultTimeout{ NonZeroTimeout() };
     };
 
 } // Policies
