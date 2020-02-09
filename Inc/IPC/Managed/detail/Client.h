@@ -61,7 +61,7 @@ namespace Managed
 
                 ~InvokeLambda()
                 {
-                    m_promise->TrySetCanceled();
+                    m_promise->TrySetException(gcnew Exception{ "Request was dropped." });
                 }
 
                 void operator()(NativeResponse&& response)

@@ -61,7 +61,7 @@ namespace Managed
 
                 ~ConnectLambda()
                 {
-                    m_promise->TrySetCanceled();
+                    m_promise->TrySetException(gcnew Exception{ "Connector request was dropped." });
                 }
 
                 void operator()(Interop::Callback<typename NativeClient::ConnectionPtr()>&& getConnection)
