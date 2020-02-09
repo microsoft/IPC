@@ -26,9 +26,10 @@ namespace Policies
             return Scheduler{
                 [&queue, handler = std::forward<Handler>(handler)]
                 {
-                    auto&& value = queue.Pop();
-                    assert(value);
-                    handler(std::move(*value));
+                    if (auto&& value = queue.Pop())
+                    {
+                        handler(std::move(*value));
+                    }
                 },
                 m_pool };
         }
