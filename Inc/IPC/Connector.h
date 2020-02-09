@@ -161,9 +161,7 @@ namespace IPC
         }
 
     private:
-        using Client = Client<detail::ConnectorInfo, detail::AcceptorInfo, Traits>;
-
-        class ConnectorClient : public Client
+        class ConnectorClient : public Client<detail::ConnectorInfo, detail::AcceptorInfo, Traits>
         {
         public:
             ConnectorClient(
@@ -202,8 +200,8 @@ namespace IPC
                 typename Traits::TransactionManagerFactory&& transactionManagerFactory,
                 detail::Callback<void()>&& closeHandler,
                 detail::KernelProcess process)
-                : Client{
-                    std::make_unique<Connection>(
+                : ConnectorClient::Client{
+                    std::make_unique<typename ConnectorClient::Connection>(
                         detail::KernelEvent{ create_only, false, false, pingInfo.m_connectorCloseEventName.c_str() },
                         true,
                         detail::KernelEvent{ open_only, acceptorHostInfo.m_acceptorCloseEventName.c_str() },
@@ -212,7 +210,7 @@ namespace IPC
                         std::move(channels.first),
                         std::move(channels.second)),
                     std::move(closeHandler),
-                    std::move(transactionManagerFactory)(detail::Identity<typename Client::TransactionManager>{}) },
+                    std::move(transactionManagerFactory)(detail::Identity<typename ConnectorClient::Client::TransactionManager>{}) },
                   m_process{ std::move(process) },
                   m_channelFactory{ std::move(channelFactory) }
             {}
@@ -222,8 +220,10 @@ namespace IPC
                 auto channelFactoryInstance = channelFactory.MakeInstance();
 
                 // Create in a strict order. Must be the reverse of the acceptor.
-                auto output = channelFactoryInstance.template CreateOutput<typename Client::OutputPacket>(pingInfo.m_connectorInfoChannelName.c_str());
-                auto input = channelFactoryInstance.template CreateInput<typename Client::InputPacket>(pingInfo.m_acceptorInfoChannelName.c_str());
+                auto output = channelFactoryInstance.template CreateOutput<typename ConnectorClient::Client::OutputPacket>(
+                    pingInfo.m_connectorInfoChannelName.c_str());
+                auto input = channelFactoryInstance.template CreateInput<typename ConnectorClient::Client::InputPacket>(
+                    pingInfo.m_acceptorInfoChannelName.c_str());
 
                 return std::make_pair(std::move(input), std::move(output));
             }
@@ -425,7 +425,7 @@ namespace IPC
     public:
         template <typename... Args>
         PacketConnector(Args&&... args)                     // TODO: Inherit constructors instead when VC14 bugs are fixed.
-            : Connector{ std::forward<Args>(args)... }
+            : PacketConnector::Connector{ std::forward<Args>(args)... }
         {}
     };
 

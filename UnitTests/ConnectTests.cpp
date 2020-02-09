@@ -262,7 +262,7 @@ BOOST_AUTO_TEST_CASE(ServerReconnectionTest)
         BOOST_TEST(!connection->IsClosed());
     }
 
-    std::make_unique<decltype(serverAccessor)>(std::move(serverAccessor));
+    (void)std::make_unique<decltype(serverAccessor)>(std::move(serverAccessor));
     BOOST_TEST(context.unique());
 }
 

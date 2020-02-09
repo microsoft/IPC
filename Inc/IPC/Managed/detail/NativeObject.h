@@ -89,7 +89,7 @@ namespace Managed
                 {
                     if (!m_obj)
                     {
-                        throw gcnew System::ObjectDisposedException{ gcnew System::String{ typeid(T).name() } };
+                        throw gcnew System::ObjectDisposedException{ NativeObject::typeid->FullName };
                     }
 
                     return *m_obj;

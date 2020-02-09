@@ -26,7 +26,7 @@ namespace IPC
         protected:
             template <typename... Handlers>
             PacketConnectionHolder(std::unique_ptr<typename PacketConnectionHolder::Connection> connection, Context context, Handlers&&... handlers)
-                : ConnectionHolder{ std::move(connection) },
+                : PacketConnectionHolder::ConnectionHolder{ std::move(connection) },
                   Context{ std::move(context) }
             {
                 this->Register(std::forward<Handlers>(handlers)...);

@@ -14,7 +14,7 @@ namespace Managed
     {
         template <typename Request, typename Response>
         Transport<Request, Response>::ServerAcceptor::ServerAcceptor(const char* name, HandlerFactory&& handlerFactory, const Config& config)
-            : unique_ptr{ std::make_unique<IPC::ServerAcceptor<Request, Response, Traits>>(
+            : ServerAcceptor::unique_ptr{ std::make_unique<IPC::ServerAcceptor<Request, Response, Traits>>(
                 name,
                 [handlerFactory = std::move(handlerFactory)](auto&& futureConnection) mutable
                 {

@@ -56,7 +56,7 @@ namespace Managed
             {
             public:
                 ClientFactoryLambda(const NativeConfig& config, ClientAccessor^ accessor)
-                    : ComponentFactoryLambdaBase{ config, accessor }
+                    : ClientFactoryLambda::ComponentFactoryLambdaBase{ config, accessor }
                 {}
 
             protected:

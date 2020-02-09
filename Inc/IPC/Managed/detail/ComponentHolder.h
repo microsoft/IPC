@@ -22,7 +22,7 @@ namespace Managed
         ref struct SelfDisposer : NativeObject<T>
         {
             explicit SelfDisposer(const T& obj)
-                : NativeObject{ obj }
+                : NativeObject<T>{ obj }
             {}
 
             void operator()(void*)

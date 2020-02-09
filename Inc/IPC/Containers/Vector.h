@@ -11,7 +11,7 @@ namespace Containers
     template <typename T>
     class Vector : public detail::Container<boost::interprocess::vector<T, SharedMemory::Allocator<T>>>
     {
-        using Container::Container;
+        using Vector::Container::Container;
     };
 
 } // Containers

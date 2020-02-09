@@ -77,7 +77,7 @@ namespace Managed
 
         Interop::Policies::ReceiverFactory MakeReceiverFactory()
         {
-            return []
+            return { []
             {
                 msclr::gcroot<Scheduler^> scheduler{ gcnew Scheduler{} };
 
@@ -87,7 +87,7 @@ namespace Managed
                 {
                     scheduler->Schedule(std::move(callback));
                 };
-            };
+            } };
         }
 
     } // Policies
