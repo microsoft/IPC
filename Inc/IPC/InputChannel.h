@@ -29,7 +29,7 @@ namespace IPC
         template <typename Handler>
         std::size_t ReceiveAll(Handler&& handler)
         {
-            return this->IsEmpty() ? 0 : ConsumeAll([&] { return this->GetQueue().ConsumeAll(handler); });
+            return ConsumeAll([&] { return this->GetQueue().ConsumeAll(handler); });
         }
 
         template <typename Handler>
@@ -44,11 +44,7 @@ namespace IPC
                 this->GetNotEmptyEvent(),
                 [this, receiver = m_receiverFactory(this->GetQueue(), std::forward<Handler>(handler))]() mutable
                 {
-                    if (!this->IsEmpty())
-                    {
-                        ConsumeAll(receiver);
-                    }
-
+                    ConsumeAll(receiver);
                     return true;
                 });
 
@@ -77,20 +73,21 @@ namespace IPC
         template <typename Receiver>
         std::size_t ConsumeAll(Receiver&& receiver)
         {
-            assert(!this->IsEmpty());
-
-            auto memory = this->GetMemory();    // Make sure memory does not die if receiver deletes this.
-            auto& counter = this->GetCounter();
-
-            std::size_t n, count{ 0 };
-
-            do
+            if (auto& counter = this->GetCounter())
             {
-                count += (n = receiver());      // Receiver may delete this.
+                auto memory = this->GetMemory();    // Make sure memory does not die if receiver deletes this.
+                std::size_t n, count{ 0 };
 
-            } while ((counter -= n) != 0);
+                do
+                {
+                    count += (n = receiver());      // Receiver may delete this.
 
-            return count;
+                } while ((counter -= n) != 0);
+
+                return count;
+            }
+
+            return 0;
         }
 
         using WaitHandle = decltype(std::declval<WaitHandleFactory>()(
