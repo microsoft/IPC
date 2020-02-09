@@ -7,8 +7,19 @@
 #include <boost/config.hpp>
 #pragma warning(pop)
 
+#if _MSC_VER < 1800
+#error Unsupported compiler version
+#elif _MSC_VER < 1900
+#define IPC_MSVC_MAJOR_VERSION 18
+#elif _MSC_VER < 2000
+#define IPC_MSVC_MAJOR_VERSION 19
+#elif _MSC_VER < 2100
+#define IPC_MSVC_MAJOR_VERSION 20
+#else
+#error Unknown compiler version
+#endif
 
-#define IPC_COMPILER_VERSION    "MSVC-" BOOST_STRINGIZE(_MSC_VER)
+#define IPC_COMPILER_VERSION    "MSVC-" BOOST_STRINGIZE(IPC_MSVC_MAJOR_VERSION) "00"
 
 #define IPC_BOOST_VERSION       "BOOST-" BOOST_STRINGIZE(BOOST_VERSION)
 
