@@ -46,7 +46,7 @@ namespace Managed
         class Transport
         {
         public:
-            using CloseHandler = Callback<void()>;
+            typedef Callback<void()> CloseHandler;
 
 
             class Server : public std::unique_ptr<IPC::Server<Request, Response, Traits>>
@@ -54,7 +54,7 @@ namespace Managed
             public:
                 struct ConnectionPtr : std::unique_ptr<IPC::ServerConnection<Request, Response, Traits>>
                 {
-                    using unique_ptr::unique_ptr;
+                    using std::unique_ptr<IPC::ServerConnection<Request, Response, Traits>>::unique_ptr;
 
                     ConnectionPtr(ConnectionPtr&& other);
 
@@ -88,7 +88,7 @@ namespace Managed
             public:
                 struct ConnectionPtr : std::unique_ptr<IPC::ClientConnection<Request, Response, Traits>>
                 {
-                    using unique_ptr::unique_ptr;
+                    using std::unique_ptr<IPC::ClientConnection<Request, Response, Traits>>::unique_ptr;
 
                     ConnectionPtr(ConnectionPtr&& other);
 

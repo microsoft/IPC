@@ -14,7 +14,7 @@ namespace Managed
     {
         template <typename Request, typename Response>
         Transport<Request, Response>::ClientConnector::ClientConnector(const Config& config)
-            : shared_ptr{ std::make_shared<IPC::ClientConnector<Request, Response, Traits>>(
+            : ClientConnector::shared_ptr{ std::make_shared<IPC::ClientConnector<Request, Response, Traits>>(
                 config.m_channelSettings,
                 Policies::TransactionManagerFactory{ config.m_timeoutFactory, config.m_defaultRequestTimeout }) }
         {}

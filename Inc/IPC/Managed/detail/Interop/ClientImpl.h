@@ -34,7 +34,7 @@ namespace Managed
 
         template <typename Request, typename Response>
         Transport<Request, Response>::Client::Client(ConnectionPtr&& connection, CloseHandler&& closeHandler, const Config& config)
-            : unique_ptr{ std::make_unique<IPC::Client<Request, Response, Traits>>(
+            : Client::unique_ptr{ std::make_unique<IPC::Client<Request, Response, Traits>>(
                 std::move(connection),
                 std::move(closeHandler),
                 typename IPC::Client<Request, Response, Traits>::TransactionManager{ config.m_timeoutFactory, config.m_defaultRequestTimeout }) }

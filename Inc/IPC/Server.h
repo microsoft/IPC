@@ -36,11 +36,11 @@ namespace IPC
         using typename PacketConnectionHolder::OutputPacket;
 
     public:
-        static_assert(!std::is_void<Request>::value, "Request cannot be void.");
-        static_assert(std::is_same<Connection, ServerConnection<Request, Response, Traits>>::value, "Connection definitions must be the same.");
-
         using typename PacketConnectionHolder::Connection;
         using HandlerCallback = typename PacketConnectionHolder::HandlerCallback;
+
+        static_assert(!std::is_void<Request>::value, "Request cannot be void.");
+        static_assert(std::is_same<Connection, ServerConnection<Request, Response, Traits>>::value, "Connection definitions must be the same.");
 
         template <typename Handler, typename CloseHandler>
         Server(std::unique_ptr<Connection> connection, Handler&& handler, CloseHandler&& closeHandler)

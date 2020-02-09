@@ -39,7 +39,7 @@ namespace IPC
             {
             public:
                 explicit Instance(ChannelSettings<Traits> settings)
-                    : ChannelSettings{ std::move(settings) }
+                    : Instance::ChannelSettings{ std::move(settings) }
                 {}
 
                 template <typename T>
@@ -71,7 +71,7 @@ namespace IPC
                 auto MakeInput(OpenOrCreate openOrCreate, const char* name)
                 {
                     return InputChannel<T, Traits>{
-                        openOrCreate, name, GetMemory(openOrCreate, true, name, *this), GetWaitHandleFactory(), GetReceiverFactory() };
+                        openOrCreate, name, GetMemory(openOrCreate, true, name, *this), this->GetWaitHandleFactory(), this->GetReceiverFactory() };
                 }
 
                 template <typename T, typename OpenOrCreate>
@@ -83,7 +83,7 @@ namespace IPC
 
 
             explicit ChannelFactory(ChannelSettings<Traits> settings)
-                : ChannelSettings{ std::move(settings) }
+                : ChannelFactory::ChannelSettings{ std::move(settings) }
             {}
 
             auto MakeInstance() const

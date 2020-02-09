@@ -26,7 +26,7 @@ namespace Managed
                 {
                     try
                     {
-                        (*m_component)(
+                        (*this->m_component)(
                             Cast(request),
                             MakeManagedCallback(gcnew InvokeLambda{ promise }),
                             std::chrono::milliseconds{ static_cast<std::chrono::milliseconds::rep>(timeout.TotalMilliseconds) });
@@ -46,11 +46,11 @@ namespace Managed
 
         internal:
             Client(typename NativeClient::ConnectionPtr&& connection, const NativeConfig& config)
-                : Component{ std::move(connection), nullptr, *config }
+                : Client::Component{ std::move(connection), nullptr, *config }
             {}
 
             Client(typename NativeClient::ConnectionPtr&& connection, Interop::Callback<void()>&& closeHandler, const NativeConfig& config)
-                : Component{ std::move(connection), std::move(closeHandler), *config }
+                : Client::Component{ std::move(connection), std::move(closeHandler), *config }
             {}
 
             ref struct InvokeLambda

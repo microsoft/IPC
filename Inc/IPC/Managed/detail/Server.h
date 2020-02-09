@@ -36,11 +36,11 @@ namespace Managed
 
         internal:
             Server(typename NativeServer::ConnectionPtr&& connection, HandlerFactory^ handlerFactory, const NativeConfig& config)
-                : Component{ std::move(connection), nullptr, MakeHandlerFactory(connection, handlerFactory), *config }
+                : Server::Component{ std::move(connection), nullptr, MakeHandlerFactory(connection, handlerFactory), *config }
             {}
 
             Server(typename NativeServer::ConnectionPtr&& connection, HandlerFactory^ handlerFactory, Interop::Callback<void()>&& closeHandler, const NativeConfig& config)
-                : Component{ std::move(connection), std::move(closeHandler), MakeHandlerFactory(connection, handlerFactory), *config }
+                : Server::Component{ std::move(connection), std::move(closeHandler), MakeHandlerFactory(connection, handlerFactory), *config }
             {}
 
             ~Server()

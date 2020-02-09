@@ -33,7 +33,7 @@ namespace Managed
 
         template <typename Request, typename Response>
         Transport<Request, Response>::Server::Server(ConnectionPtr&& connection, CloseHandler&& closeHandler, Handler&& handler, const Config& /*config*/)
-            : unique_ptr{ std::make_unique<IPC::Server<Request, Response, Traits>>(std::move(connection), std::move(handler), std::move(closeHandler)) }
+            : Server::unique_ptr{ std::make_unique<IPC::Server<Request, Response, Traits>>(std::move(connection), std::move(handler), std::move(closeHandler)) }
         {}
 
         template <typename Request, typename Response>

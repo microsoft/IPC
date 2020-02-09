@@ -23,7 +23,7 @@ namespace IPC
             ComponentFactory&& componentFactory,
             TransactionArgs&&... transactionArgs)
         {
-            using Component = decltype(componentFactory(
+            using Component = typename decltype(componentFactory(
                 std::declval<std::unique_ptr<typename Connector::Connection>>(),
                 std::declval<Callback<void()>>()))::element_type;                                           // Deduce the component type.
 

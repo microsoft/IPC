@@ -41,7 +41,7 @@ BOOST_AUTO_TEST_CASE(AcceptedServerAutoRemovalTest)
     BOOST_TEST(context.use_count() == 2);
     BOOST_TEST(serversAccessor()->empty());
 
-    std::make_unique<decltype(serversAccessor)>(std::move(serversAccessor));
+    (void)std::make_unique<decltype(serversAccessor)>(std::move(serversAccessor));
     BOOST_TEST(waitHandleFactory.Process() != 0);
 
     BOOST_TEST(context.unique());

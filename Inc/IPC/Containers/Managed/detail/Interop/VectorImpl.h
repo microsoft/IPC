@@ -36,7 +36,7 @@ namespace Managed
 
         template <typename T>
         Vector<T>::Iterator::Iterator(const BaseIterator& it)
-            : shared_ptr{ std::make_shared<BaseIterator>(it) }
+            : std::shared_ptr<BaseIterator>{ std::make_shared<BaseIterator>(it) }
         {}
 
         template <typename T>
@@ -53,7 +53,7 @@ namespace Managed
         {
             if (!this->operator bool())
             {
-                shared_ptr::operator=(std::make_shared<BaseIterator>(container.m_impl->begin()));
+                std::shared_ptr<BaseIterator>::operator=(std::make_shared<BaseIterator>(container.m_impl->begin()));
             }
             else if (*this->get() != container.m_impl->end())
             {
@@ -126,13 +126,13 @@ namespace Managed
         template <typename T>
         auto Vector<T>::begin() -> Iterator
         {
-            return m_impl->begin();
+            return { m_impl->begin() };
         }
 
         template <typename T>
         auto Vector<T>::end() -> Iterator
         {
-            return m_impl->end();
+            return { m_impl->end() };
         }
 
         template <typename T>

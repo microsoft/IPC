@@ -3,11 +3,6 @@
 #include "IPC/Connect.h"
 #include "IPC/Accept.h"
 #include "Transport.h"
-#include "ClientImpl.h"
-#include "ServerImpl.h"
-#include "ClientConnectorImpl.h"
-#include "ServerAcceptorImpl.h"
-#include <chrono>
 
 
 namespace IPC
@@ -34,7 +29,28 @@ namespace Managed
             Traits::TimeoutFactory m_timeoutFactory;
         };
 
+    } // Interop
+    } // detail
 
+} // Managed
+} // IPC
+
+
+#include "ClientImpl.h"
+#include "ServerImpl.h"
+#include "ClientConnectorImpl.h"
+#include "ServerAcceptorImpl.h"
+#include <chrono>
+
+
+namespace IPC
+{
+namespace Managed
+{
+    namespace detail
+    {
+    namespace Interop
+    {
         auto MakeChannelSettings(std::size_t memorySize, Traits::ReceiverFactory receiverFactory, Traits::WaitHandleFactory waitHandleFactory)
         {
             ChannelSettings<Traits> settings{ std::move(waitHandleFactory), std::move(receiverFactory) };

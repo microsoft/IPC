@@ -37,11 +37,11 @@ namespace IPC
         using typename PacketConnectionHolder::OutputPacket;
 
     public:
-        static_assert(!std::is_void<Request>::value, "Request cannot be void.");
-        static_assert(std::is_same<Connection, ClientConnection<Request, Response, Traits>>::value, "Connection definitions must be the same.");
-
         using typename PacketConnectionHolder::Connection;
         using TransactionManager = typename PacketConnectionHolder::Context;
+
+        static_assert(!std::is_void<Request>::value, "Request cannot be void.");
+        static_assert(std::is_same<Connection, ClientConnection<Request, Response, Traits>>::value, "Connection definitions must be the same.");
 
         template <typename CloseHandler, typename U = Response, std::enable_if_t<!std::is_void<U>::value>* = nullptr>
         Client(std::unique_ptr<Connection> connection, CloseHandler&& closeHandler, TransactionManager transactionManager = {})

@@ -64,7 +64,7 @@ namespace Managed
             {
             public:
                 ServerFactoryLambda(HandlerFactory^ handlerFactory, const NativeConfig& config, ServersAccessor^ accessor)
-                    : ComponentFactoryLambdaBase{ config, accessor },
+                    : ServerFactoryLambda::ComponentFactoryLambdaBase{ config, accessor },
                       m_handlerFactory{ handlerFactory }
                 {}
 
