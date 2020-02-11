@@ -39,7 +39,7 @@ namespace IPC
             template <typename I = Input, typename CloseHandler, std::enable_if_t<std::is_void<I>::value>* = nullptr>
             void Register(CloseHandler&& closeHandler)
             {
-                if (!this->m_connection->RegisterCloseHandler(std::forward<CloseHandler>(closeHandler)))
+                if (!this->m_connection->RegisterCloseHandler(std::forward<CloseHandler>(closeHandler), true))
                 {
                     throw Exception{ "Failed to register for close event." };
                 }
