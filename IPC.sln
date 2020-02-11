@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29728.190
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Native", "Native\Build\Native.vcxproj", "{2030ED0D-4667-4299-87CD-ACE298BDF56D}"
 EndProject
@@ -22,6 +22,14 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ManagedContainers", "ManagedContainers\Build\ManagedContainers.vcxproj", "{123498F7-93DC-4954-8165-FDDCD66231F0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Object", "Object\Object.csproj", "{2A0B90AC-9117-48DA-B04C-FF194498D95D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Examples", "Examples", "{AE4D5AE4-4603-4213-B79A-E60207E33142}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CalcNative", "Examples\Calc\CalcNative\CalcNative.vcxproj", "{40DD9D26-2E80-44C5-917C-85036B8D7DE6}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CalcInterop", "Examples\Calc\CalcInterop\CalcInterop.vcxproj", "{20A63CD7-352F-4A2A-AE8A-1D49EEA99838}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalcManaged", "Examples\Calc\CalcManaged\CalcManaged.csproj", "{E84069C7-B1E2-4BF1-9E2F-57827A42D162}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -69,8 +77,28 @@ Global
 		{2A0B90AC-9117-48DA-B04C-FF194498D95D}.Debug|x64.Build.0 = Debug|x64
 		{2A0B90AC-9117-48DA-B04C-FF194498D95D}.Release|x64.ActiveCfg = Release|x64
 		{2A0B90AC-9117-48DA-B04C-FF194498D95D}.Release|x64.Build.0 = Release|x64
+		{40DD9D26-2E80-44C5-917C-85036B8D7DE6}.Debug|x64.ActiveCfg = Debug|x64
+		{40DD9D26-2E80-44C5-917C-85036B8D7DE6}.Debug|x64.Build.0 = Debug|x64
+		{40DD9D26-2E80-44C5-917C-85036B8D7DE6}.Release|x64.ActiveCfg = Release|x64
+		{40DD9D26-2E80-44C5-917C-85036B8D7DE6}.Release|x64.Build.0 = Release|x64
+		{20A63CD7-352F-4A2A-AE8A-1D49EEA99838}.Debug|x64.ActiveCfg = Debug|x64
+		{20A63CD7-352F-4A2A-AE8A-1D49EEA99838}.Debug|x64.Build.0 = Debug|x64
+		{20A63CD7-352F-4A2A-AE8A-1D49EEA99838}.Release|x64.ActiveCfg = Release|x64
+		{20A63CD7-352F-4A2A-AE8A-1D49EEA99838}.Release|x64.Build.0 = Release|x64
+		{E84069C7-B1E2-4BF1-9E2F-57827A42D162}.Debug|x64.ActiveCfg = Debug|x64
+		{E84069C7-B1E2-4BF1-9E2F-57827A42D162}.Debug|x64.Build.0 = Debug|x64
+		{E84069C7-B1E2-4BF1-9E2F-57827A42D162}.Release|x64.ActiveCfg = Release|x64
+		{E84069C7-B1E2-4BF1-9E2F-57827A42D162}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{40DD9D26-2E80-44C5-917C-85036B8D7DE6} = {AE4D5AE4-4603-4213-B79A-E60207E33142}
+		{20A63CD7-352F-4A2A-AE8A-1D49EEA99838} = {AE4D5AE4-4603-4213-B79A-E60207E33142}
+		{E84069C7-B1E2-4BF1-9E2F-57827A42D162} = {AE4D5AE4-4603-4213-B79A-E60207E33142}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DF91630B-BDEF-46FB-8CD2-B88C7733068C}
 	EndGlobalSection
 EndGlobal
