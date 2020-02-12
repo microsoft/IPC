@@ -5,9 +5,9 @@ namespace IPC
 {
 namespace Policies
 {
-    class NullTimeoutFactory;
+    class InfiniteTimeoutFactory;
 
-    template <typename Context, typename TimeoutFactory = NullTimeoutFactory>
+    template <typename Context, typename TimeoutFactory = InfiniteTimeoutFactory>
     class TransactionManager;
 
 } // Policies

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "TransactionManagerFwd.h"
-#include "NullTimeoutFactory.h"
+#include "InfiniteTimeoutFactory.h"
 #include "IPC/detail/LockFree/IndexedObjectPool.h"
 #include <chrono>
 #include <cassert>

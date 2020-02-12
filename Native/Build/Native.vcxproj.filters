@@ -191,9 +191,6 @@
     <ClInclude Include="..\..\Inc\IPC\detail\LockFree\IndexedObjectPool.h">
       <Filter>detail\LockFree</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Inc\IPC\Policies\NullTimeoutFactory.h">
-      <Filter>Policies</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Inc\IPC\Policies\ReceiverFactoryFwd.h">
       <Filter>Policies</Filter>
     </ClInclude>
@@ -207,6 +204,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Inc\IPC\Version.h" />
     <ClInclude Include="..\..\Inc\IPC\Transport.h" />
+    <ClInclude Include="..\..\Inc\IPC\Policies\InfiniteTimeoutFactory.h">
+      <Filter>Policies</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

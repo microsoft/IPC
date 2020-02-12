@@ -80,7 +80,7 @@
     <ClInclude Include="..\..\Inc\IPC\Policies\AsyncReceiverFactory.h" />
     <ClInclude Include="..\..\Inc\IPC\Policies\ErrorHandler.h" />
     <ClInclude Include="..\..\Inc\IPC\Policies\InlineReceiverFactory.h" />
-    <ClInclude Include="..\..\Inc\IPC\Policies\NullTimeoutFactory.h" />
+    <ClInclude Include="..\..\Inc\IPC\Policies\InfiniteTimeoutFactory.h" />
     <ClInclude Include="..\..\Inc\IPC\Policies\ReceiverFactory.h" />
     <ClInclude Include="..\..\Inc\IPC\Policies\ReceiverFactoryFwd.h" />
     <ClInclude Include="..\..\Inc\IPC\Policies\ThreadPool.h" />
