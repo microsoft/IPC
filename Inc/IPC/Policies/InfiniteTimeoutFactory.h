@@ -12,7 +12,7 @@ namespace Policies
     class InfiniteTimeoutFactory
     {
     public:
-        InfiniteTimeoutFactory(const std::chrono::milliseconds& /*defaultTimeout*/ = {})
+        InfiniteTimeoutFactory(const std::chrono::milliseconds& /*defaultTimeout*/ = std::chrono::milliseconds::zero())
         {}
 
         auto operator()(const detail::Callback<void()>& /*handler*/) const
