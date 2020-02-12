@@ -1,7 +1,7 @@
 #pragma once
 
 #include "IPC/DefaultTraits.h"
-#include "IPC/Policies/NullTimeoutFactory.h"
+#include "IPC/Policies/InfiniteTimeoutFactory.h"
 #include "WaitHandleFactoryMock.h"
 #include <exception>
 
@@ -14,7 +14,7 @@ namespace Mocks
 {
     struct NullTimeoutTraits : DefaultTraits
     {
-        using TimeoutFactory = Policies::NullTimeoutFactory;
+        using TimeoutFactory = Policies::InfiniteTimeoutFactory;
 
         template <typename Context>
         using TransactionManager = Policies::TransactionManager<Context, TimeoutFactory>;
