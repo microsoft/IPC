@@ -33,7 +33,7 @@ namespace Mocks
         };
 
     public:
-        TimeoutFactory(const std::chrono::milliseconds& defaultTimeout = {});
+        TimeoutFactory(const std::chrono::milliseconds& defaultTimeout = std::chrono::milliseconds::zero());
 
         std::size_t Process();
 

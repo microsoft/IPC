@@ -42,7 +42,7 @@ namespace Policies
         };
 
     public:
-        TimeoutFactory(const std::chrono::milliseconds& defaultTimeout = {}, boost::optional<ThreadPool> pool = {});
+        TimeoutFactory(const std::chrono::milliseconds& defaultTimeout = std::chrono::milliseconds::zero(), boost::optional<ThreadPool> pool = {});
 
         Scheduler operator()(detail::Callback<void()> handler) const;
 

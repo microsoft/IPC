@@ -23,13 +23,13 @@ namespace Policies
 
         TransactionManager() = default;
 
-        explicit TransactionManager(TimeoutFactory timeoutFactory, const std::chrono::milliseconds& defaultTimeout = {})
+        explicit TransactionManager(TimeoutFactory timeoutFactory, const std::chrono::milliseconds& defaultTimeout = std::chrono::milliseconds::zero())
             : m_timeoutFactory{ std::move(timeoutFactory) },
               m_defaultTimeout{ NonZeroTimeout(defaultTimeout) }
         {}
 
         template <typename OtherContext>
-        Id BeginTransaction(OtherContext&& context, const std::chrono::milliseconds& timeout = {})
+        Id BeginTransaction(OtherContext&& context, const std::chrono::milliseconds& timeout = std::chrono::milliseconds::zero())
         {
             auto result = m_transactions->Take(
                 [this](Id id)
