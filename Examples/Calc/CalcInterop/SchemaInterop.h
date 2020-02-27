@@ -15,20 +15,8 @@ namespace Managed
     };
 
     [IPC::Managed::Object]
-    public ref class Request
+    public ref struct Request
     {
-    internal:
-        Request(const Calc::Request& request)
-        {
-            X = request.X;
-            Y = request.Y;
-            Op = static_cast<Operation>(request.Op);
-        }
-
-    public:
-        Request()
-        {}
-
         property System::Single X;
         property System::Single Y;
         property Operation Op;

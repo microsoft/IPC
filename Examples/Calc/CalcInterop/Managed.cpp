@@ -15,7 +15,7 @@ namespace Managed
 
             static Calc::Request From(type% from)
             {
-                return Calc::Request{ from->X, from->Y };
+                return Calc::Request{ from->X, from->Y, static_cast<Calc::Operation>(from->Op) };
             }
         };
 
@@ -26,7 +26,11 @@ namespace Managed
 
             static Calc::Managed::Request^ From(const type& from)
             {
-                return gcnew Calc::Managed::Request{ from };
+                auto request = gcnew Calc::Managed::Request;
+                request->X = from.X;
+                request->Y = from.Y;
+                request->Op = static_cast<Calc::Managed::Operation>(from.Op);
+                return request;
             }
         };
 

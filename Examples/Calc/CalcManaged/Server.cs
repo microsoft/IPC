@@ -13,6 +13,8 @@ namespace CalcManaged
             using (var transport = factory.Make<Calc.Managed.Request, Calc.Managed.Response>())
             using (var serversAccessor = transport.AcceptServers(address, (inMemory, outMemory) => new Service(outMemory).Invoke))
             {
+                serversAccessor.Error += (sender, args) => Console.WriteLine($"IPC: {args.Exception.Message}");
+
                 serversAccessor.Connected += (sender, args) =>
                     Console.WriteLine($"Connected: {args.Component.InputMemory.Name} -> {args.Component.OutputMemory.Name}");
 

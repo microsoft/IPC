@@ -39,7 +39,7 @@ namespace CalcManaged
                         }
                         catch (System.Exception e)
                         {
-                            Console.WriteLine($"Error: {e.Message}");
+                            Console.WriteLine($"Failed to access the client: {e.Message}");
                             continue;
                         }
 
@@ -53,7 +53,7 @@ namespace CalcManaged
                     {
                         X = (float)random.NextDouble(1.0, 99.0),
                         Y = (float)random.NextDouble(1.0, 99.0),
-                        Op = (Calc.Managed.Operation)random.Next(0, 3)
+                        Op = (Calc.Managed.Operation)random.Next(0, 4)
                     };
 
                     Calc.Managed.Response response;
@@ -67,19 +67,19 @@ namespace CalcManaged
                     }
                     catch (System.Exception e)
                     {
-                        Console.WriteLine($"Error: {e.Message}");
+                        Console.WriteLine($"Failed to send request: {e.Message}");
                         client = null;
                         continue;
                     }
 
                     stopwatch.Stop();
 
-                    Console.WriteLine($"{response.Text}{response.Z} [ {(stopwatch.ElapsedTicks * 1000000.0) / Stopwatch.Frequency}us]");
+                    Console.WriteLine($"{response.Text}{response.Z} [{(stopwatch.ElapsedTicks * 1000000.0) / Stopwatch.Frequency}us]");
                 }
 
-                client?.Dispose();
-
                 Console.WriteLine("Exiting...");
+
+                client?.Dispose();
             }
         }
     }

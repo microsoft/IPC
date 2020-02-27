@@ -40,7 +40,7 @@ namespace Calc
                 }
                 catch (const std::exception & e)
                 {
-                    std::cout << "Error: " << e.what() << std::endl;
+                    std::cout << "Failed to access the client: " << e.what() << std::endl;
                     continue;
                 }
 
@@ -72,7 +72,7 @@ namespace Calc
             }
             catch (std::exception& e)
             {
-                std::cout << "Error: " << e.what() << std::endl;
+                std::cout << "Failed to send request: " << e.what() << std::endl;
                 client = {};
                 continue;
             }

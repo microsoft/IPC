@@ -70,7 +70,7 @@ namespace Calc
             }
             catch (const std::exception& e)
             {
-                std::cout << "Error: " << e.what() << std::endl;
+                std::cout << "Failed to send response: " << e.what() << std::endl;
             }
         }
 
