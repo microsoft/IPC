@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Text;
+using System.Threading.Tasks;
 using IPC.Managed;
 
 namespace CalcManaged
@@ -15,32 +16,37 @@ namespace CalcManaged
         public async Task<Calc.Managed.Response> Invoke(Calc.Managed.Request request)
         {
             var response = new Calc.Managed.Response(_memory);
-            response.Text = request.X + " ";
+            var text = new StringBuilder();
+            text.Append(request.X);
+            text.Append(' ');
 
             switch (request.Op)
             {
                 case Calc.Managed.Operation.Add:
                     response.Z = request.X + request.Y;
-                    response.Text += '+';
+                    text.Append('+');
                     break;
 
                 case Calc.Managed.Operation.Subtract:
                     response.Z = request.X - request.Y;
-                    response.Text += '-';
+                    text.Append('-');
                     break;
 
                 case Calc.Managed.Operation.Multiply:
                     response.Z = request.X * request.Y;
-                    response.Text += '*';
+                    text.Append('*');
                     break;
 
                 case Calc.Managed.Operation.Divide:
                     response.Z = request.X / request.Y;
-                    response.Text += '/';
+                    text.Append('/');
                     break;
             }
 
-            response.Text += " " + request.Y + " = ";
+            text.Append(' ');
+            text.Append(request.Y);
+            text.Append(" = ");
+            response.Text = text.ToString();
             
             return response;
         }

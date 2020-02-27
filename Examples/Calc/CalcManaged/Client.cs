@@ -24,26 +24,29 @@ namespace CalcManaged
             using (var transport = factory.Make<Calc.Managed.Request, Calc.Managed.Response>())
             using (var clientAccessor = transport.ConnectClient(address, true))
             {
-                var random = new Random();
+                clientAccessor.Error += (sender, args) => Console.WriteLine($"IPC: {args.Exception.Message}");
 
-                for (IClient<Calc.Managed.Request, Calc.Managed.Response> client = null;
-                        !exit.WaitOne(TimeSpan.FromSeconds(1)); )
+                var random = new Random();
+                IClient<Calc.Managed.Request, Calc.Managed.Response> client = null;
+
+                while (!exit.WaitOne(TimeSpan.FromSeconds(1)))
                 {
                     if (client == null)
                     {
                         try
                         {
                             client = clientAccessor.Client;
-
-                            Console.WriteLine($"Connected: {client.InputMemory.Name} -> {client.OutputMemory.Name}");
-
-                            client.Closed += (sender, args) => Console.WriteLine($"Connected: {client.InputMemory.Name} -> {client.OutputMemory.Name}");
                         }
-                        catch (IPC.Managed.Exception e)
+                        catch (System.Exception e)
                         {
                             Console.WriteLine($"Error: {e.Message}");
                             continue;
                         }
+
+                        Console.WriteLine($"Connected: {client.InputMemory.Name} -> {client.OutputMemory.Name}");
+
+                        client.Closed += (sender, args) =>
+                            Console.WriteLine($"Disconnected: {client.InputMemory.Name} -> {client.OutputMemory.Name}");
                     }
 
                     var request = new Calc.Managed.Request
@@ -53,33 +56,28 @@ namespace CalcManaged
                         Op = (Calc.Managed.Operation)random.Next(0, 3)
                     };
 
-                    Task<Calc.Managed.Response> responseTask;
+                    Calc.Managed.Response response;
+
                     var stopwatch = new Stopwatch();
                     stopwatch.Start();
 
                     try
                     {
-                        responseTask = client.InvokeAsync(request);
+                        response = client.InvokeAsync(request).Result;
                     }
-                    catch (IPC.Managed.Exception e)
+                    catch (System.Exception e)
                     {
                         Console.WriteLine($"Error: {e.Message}");
                         client = null;
                         continue;
                     }
 
-                    try
-                    {
-                        var response = responseTask.Result;
-                        stopwatch.Stop();
+                    stopwatch.Stop();
 
-                        Console.WriteLine($"{response.Text}{response.Z} [ {(stopwatch.ElapsedTicks*1000000.0)/Stopwatch.Frequency}us]");
-                    }
-                    catch (IPC.Managed.Exception e)
-                    {
-                        Console.WriteLine($"Error: {e.Message}");
-                    }
+                    Console.WriteLine($"{response.Text}{response.Z} [ {(stopwatch.ElapsedTicks * 1000000.0) / Stopwatch.Frequency}us]");
                 }
+
+                client?.Dispose();
 
                 Console.WriteLine("Exiting...");
             }

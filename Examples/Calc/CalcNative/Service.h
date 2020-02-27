@@ -35,7 +35,7 @@ namespace Calc
         void operator()(const Request& request, Callback&& callback) const
         {
             Response response;
-            std::stringstream text;
+            std::ostringstream text;
             text << request.X << ' ';
 
             switch (request.Op)

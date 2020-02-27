@@ -37,24 +37,24 @@ namespace Calc
                 try
                 {
                     client = clientAccessor();
-
-                    auto info = client->GetConnection().GetInputChannel().GetMemory()->GetName() + " -> "
-                                + client->GetConnection().GetOutputChannel().GetMemory()->GetName();
-
-                    std::cout << "Connected: " << info << std::endl;
-
-                    client->GetConnection().RegisterCloseHandler(
-                        [info]
-                        {
-                            std::cout << "Disconnected: " << info << std::endl;
-                        },
-                        true);
                 }
                 catch (const std::exception & e)
                 {
                     std::cout << "Error: " << e.what() << std::endl;
                     continue;
                 }
+
+                auto info = client->GetConnection().GetInputChannel().GetMemory()->GetName() + " -> "
+                        + client->GetConnection().GetOutputChannel().GetMemory()->GetName();
+
+                std::cout << "Connected: " << info << std::endl;
+
+                client->GetConnection().RegisterCloseHandler(
+                    [info]
+                    {
+                        std::cout << "Disconnected: " << info << std::endl;
+                    },
+                    true);
             }
 
             Request request;
@@ -62,33 +62,25 @@ namespace Calc
             request.Y = nums(rng);
             request.Op = static_cast<Operation>(op(rng));
 
-            std::future<Response> futureResponse;
+            boost::optional<Response> response;
+
             const auto begin = std::chrono::steady_clock::now();
 
             try
             {
-                futureResponse = (*client)(std::move(request));
+                response = (*client)(std::move(request)).get();
             }
-            catch (const std::exception& e)
+            catch (std::exception& e)
             {
                 std::cout << "Error: " << e.what() << std::endl;
                 client = {};
                 continue;
             }
 
-            try
-            {
-                auto response = futureResponse.get();
+            const auto end = std::chrono::steady_clock::now();
+            const auto latency = std::chrono::duration_cast<std::chrono::microseconds>(end - begin);
 
-                const auto end = std::chrono::steady_clock::now();
-                const auto latency = std::chrono::duration_cast<std::chrono::microseconds>(end - begin);
-
-                std::cout << response.Text << response.Z << " [" << latency.count() << "us]" << std::endl;
-            }
-            catch (std::exception& e)
-            {
-                std::cout << "Error: " << e.what() << std::endl;
-            }
+            std::cout << response->Text << response->Z << " [" << latency.count() << "us]" << std::endl;
         }
 
         std::cout << "Exiting..." << std::endl;

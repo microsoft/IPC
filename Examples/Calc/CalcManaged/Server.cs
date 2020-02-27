@@ -26,6 +26,11 @@ namespace CalcManaged
                 exit.WaitOne();
 
                 Console.WriteLine("Exiting...");
+
+                foreach (var server in serversAccessor.Servers) // Just to trigger Disconnected events
+                {
+                    server.Dispose();
+                }
             }
         }
     }

@@ -1,5 +1,5 @@
-﻿using IPC.Managed;
-using System;
+﻿using System;
+using IPC.Managed;
 
 namespace CalcManaged
 {
