@@ -36,7 +36,7 @@
 /.vs
 /IPC.VC.VC.opendb
 /IPC.VC.db
-*.vcxproj.user
+*.user
 
 # Build folders
 **/x64
