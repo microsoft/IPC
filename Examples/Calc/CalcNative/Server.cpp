@@ -18,17 +18,12 @@ namespace Calc
             address,
             [](auto& connection)
             {
-                auto info = connection.GetInputChannel().GetMemory()->GetName() + " -> "
-                            + connection.GetOutputChannel().GetMemory()->GetName();
+                const auto info = connection.GetInputChannel().GetMemory()->GetName() + " -> "
+                                + connection.GetOutputChannel().GetMemory()->GetName();
 
                 std::cout << "Connected: " << info << std::endl;
 
-                connection.RegisterCloseHandler(
-                    [info]
-                    {
-                        std::cout << "Disconnected: " << info << std::endl;
-                    },
-                    true);
+                connection.RegisterCloseHandler([info] { std::cout << "Disconnected: " << info << std::endl; }, true);
 
                 return Service{ connection.GetOutputChannel().GetMemory() };
             });

@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{E84069C7-B1E2-4BF1-9E2F-57827A42D162}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>CalcManaged</RootNamespace>
+    <RootNamespace>Calc.Managed</RootNamespace>
     <AssemblyName>CalcManaged</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

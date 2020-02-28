@@ -15,7 +15,7 @@ The [Boost package](https://www.nuget.org/packages/boost/) will automatically st
 
 # Getting Started
 
-Start with [C++](https://github.com/Microsoft/IPC/blob/master/UnitTests/TransportTests.cpp) and [C#](https://github.com/Microsoft/IPC/blob/master/UnitTestsManaged/TransportTests.cs) tests.
+Start with [examples](https://github.com/Microsoft/IPC/tree/master/Examples), [C++](https://github.com/Microsoft/IPC/blob/master/UnitTests/TransportTests.cpp) and [C#](https://github.com/Microsoft/IPC/blob/master/UnitTestsManaged/TransportTests.cs) tests.
 
 # Contributing
 

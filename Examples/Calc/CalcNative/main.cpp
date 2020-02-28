@@ -27,7 +27,7 @@ int main(int argc, char* argv[])
         }
 
     default:
-        std::cout << "Pass --server or --client options." << std::endl;
+        std::cout << "Pass --server or --client option." << std::endl;
         return 1;
     }
 

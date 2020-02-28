@@ -4,7 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using IPC.Managed;
 
-namespace CalcManaged
+namespace Calc.Managed
 {
     internal static class Client
     {
@@ -16,18 +16,18 @@ namespace CalcManaged
         public static void Run(TransportFactory factory, string address)
         {
             Console.WriteLine("Press Ctrl+C to exit.");
-            var exit = new ManualResetEvent(false);
-            Console.CancelKeyPress += (sender, args) => { args.Cancel = true; exit.Set(); };
-
             Console.WriteLine($"Connecting to {address}");
 
-            using (var transport = factory.Make<Calc.Managed.Request, Calc.Managed.Response>())
+            using (var exit = new ManualResetEvent(false))
+            using (var transport = factory.Make<Request, Response>())
             using (var clientAccessor = transport.ConnectClient(address, true))
             {
+                Console.CancelKeyPress += (sender, args) => { args.Cancel = true; exit.Set(); };
+
                 clientAccessor.Error += (sender, args) => Console.WriteLine($"IPC: {args.Exception.Message}");
 
                 var random = new Random();
-                IClient<Calc.Managed.Request, Calc.Managed.Response> client = null;
+                IClient<Request, Response> client = null;
 
                 while (!exit.WaitOne(TimeSpan.FromSeconds(1)))
                 {
@@ -43,20 +43,21 @@ namespace CalcManaged
                             continue;
                         }
 
-                        Console.WriteLine($"Connected: {client.InputMemory.Name} -> {client.OutputMemory.Name}");
+                        var info = $"{client.InputMemory.Name} -> {client.OutputMemory.Name}";
 
-                        client.Closed += (sender, args) =>
-                            Console.WriteLine($"Disconnected: {client.InputMemory.Name} -> {client.OutputMemory.Name}");
+                        Console.WriteLine($"Connected: {info}");
+
+                        client.Closed += (sender, args) => Console.WriteLine($"Disconnected: {info}");
                     }
 
-                    var request = new Calc.Managed.Request
+                    var request = new Request
                     {
                         X = (float)random.NextDouble(1.0, 99.0),
                         Y = (float)random.NextDouble(1.0, 99.0),
-                        Op = (Calc.Managed.Operation)random.Next(0, 4)
+                        Op = (Operation)random.Next(0, 4)
                     };
 
-                    Calc.Managed.Response response;
+                    Response response;
 
                     var stopwatch = new Stopwatch();
                     stopwatch.Start();
