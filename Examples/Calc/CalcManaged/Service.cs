@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using IPC.Managed;
 
-namespace CalcManaged
+namespace Calc.Managed
 {
     internal class Service
     {
@@ -13,31 +13,31 @@ namespace CalcManaged
             _memory = memory;
         }
 
-        public async Task<Calc.Managed.Response> Invoke(Calc.Managed.Request request)
+        public Task<Response> Invoke(Request request)
         {
-            var response = new Calc.Managed.Response(_memory);
+            var response = new Response(_memory);
             var text = new StringBuilder();
             text.Append(request.X);
             text.Append(' ');
 
             switch (request.Op)
             {
-                case Calc.Managed.Operation.Add:
+                case Operation.Add:
                     response.Z = request.X + request.Y;
                     text.Append('+');
                     break;
 
-                case Calc.Managed.Operation.Subtract:
+                case Operation.Subtract:
                     response.Z = request.X - request.Y;
                     text.Append('-');
                     break;
 
-                case Calc.Managed.Operation.Multiply:
+                case Operation.Multiply:
                     response.Z = request.X * request.Y;
                     text.Append('*');
                     break;
 
-                case Calc.Managed.Operation.Divide:
+                case Operation.Divide:
                     response.Z = request.X / request.Y;
                     text.Append('/');
                     break;
@@ -47,8 +47,8 @@ namespace CalcManaged
             text.Append(request.Y);
             text.Append(" = ");
             response.Text = text.ToString();
-            
-            return response;
+
+            return Task.FromResult(response);
         }
     }
 }

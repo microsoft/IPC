@@ -1,7 +1,7 @@
 ﻿using System;
 using IPC.Managed;
 
-namespace CalcManaged
+namespace Calc.Managed
 {
     static class Program
     {
@@ -10,11 +10,6 @@ namespace CalcManaged
         static Program()
         {
             _factory.Register(System.Reflection.Assembly.Load("CalcInterop"));
-        }
-
-        static void RunServer(string address)
-        {
-            Server.Run(_factory, address);
         }
 
         static int Main(string[] args)
@@ -37,7 +32,7 @@ namespace CalcManaged
                     goto default;
 
                 default:
-                    Console.WriteLine("Pass --server or --client options.");
+                    Console.WriteLine("Pass --server or --client option.");
                     return 1;
             }
 

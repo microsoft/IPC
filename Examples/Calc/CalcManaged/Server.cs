@@ -2,7 +2,7 @@
 using System.Threading;
 using IPC.Managed;
 
-namespace CalcManaged
+namespace Calc.Managed
 {
     internal static class Server
     {
@@ -10,7 +10,7 @@ namespace CalcManaged
         {
             Console.WriteLine($"Hosting server at {address}");
 
-            using (var transport = factory.Make<Calc.Managed.Request, Calc.Managed.Response>())
+            using (var transport = factory.Make<Request, Response>())
             using (var serversAccessor = transport.AcceptServers(address, (inMemory, outMemory) => new Service(outMemory).Invoke))
             {
                 serversAccessor.Error += (sender, args) => Console.WriteLine($"IPC: {args.Exception.Message}");
@@ -23,9 +23,11 @@ namespace CalcManaged
 
                 Console.WriteLine("Press Ctrl+C to exit.");
 
-                var exit = new ManualResetEvent(false);
-                Console.CancelKeyPress += (sender, args) => { args.Cancel = true; exit.Set(); };
-                exit.WaitOne();
+                using (var exit = new ManualResetEvent(false))
+                {
+                    Console.CancelKeyPress += (sender, args) => { args.Cancel = true; exit.Set(); };
+                    exit.WaitOne();
+                }
 
                 Console.WriteLine("Exiting...");
 
